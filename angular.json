@@ -35,6 +35,14 @@
             "scripts": []
           },
           "configurations": {
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -70,6 +78,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "local": {
+              "browserTarget": "annals-science-front:build:local"
+            },
             "production": {
               "browserTarget": "annals-science-front:build:production"
             },
