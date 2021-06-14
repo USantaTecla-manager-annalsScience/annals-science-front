@@ -1,0 +1,21 @@
+
+.home-content{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card{
+    width: 18rem;
+    margin-right: 10px;
+}
+
+.row{
+    margin-bottom: 5px;
+}
+
+.h3{
+    margin: 3px;
+}
+
+   

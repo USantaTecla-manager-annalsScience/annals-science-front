@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DATA_ENTITY } from './models/home-data-view';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeViewComponent implements OnInit {
+
+  _dataEntity = DATA_ENTITY;
 
   constructor() { }
 
