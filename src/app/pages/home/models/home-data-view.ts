@@ -23,8 +23,9 @@ export const HEADER_LOGIN: any[] = [
 ];
 
 export const HEADER_REGISTER: any[] = [
-    {field:'userName', value: 'Nombre', isInput: true},
+    { field: 'name', value: 'Nombre', isInput: true },
+    { field: 'surname', value: 'Apellido', isInput: true },
     { field: 'email', value: 'Email: ', isInput: true },
     { field: 'password', value: 'Contraseña: ', isInput: true },
-    {field: 'passwordRepeat', value:'Repita contraseña', isInput: true}
+    { field: 'passwordRepeat', value: 'Repita contraseña', isInput: true }
 ];

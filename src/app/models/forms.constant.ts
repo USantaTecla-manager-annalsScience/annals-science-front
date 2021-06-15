@@ -11,7 +11,8 @@ const LOGIN_FORM = {
 
 const REGISTER_FORM = {
     CONF:{
-        userName: ['', Validators.required],
+        name: ['', Validators.required],
+        surname: ['', Validators.required],
         email: ['', [Validators.required, Validators.pattern(EMAIL_REG_EXP)]],
         password: ['',Validators.required],
         passwordRepeat: ['', Validators.required]

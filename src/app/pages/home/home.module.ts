@@ -11,6 +11,8 @@ import { ModalTemplateComponent } from 'src/app/components/modals/modal-template
 import { HomeViewComponent } from './home.component';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @NgModule({
@@ -29,10 +31,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatCommonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule
     
   ],
   entryComponents:[ModalLoginRegisterComponent],
-  providers:[]
+  providers:[AuthService]
 })
 export class HomeModule { }
