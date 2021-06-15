@@ -1,8 +1,14 @@
+import { Category } from "./category.interface";
+import { Product } from "./product.interface";
+
 export interface Entity{
+    id?: string;
     name: string;
-    surname: string;
-    birth?: string;
-    deadth?: string;
+    creationDate?: string;
+    endDate?: string;
     description?: string;
-    image: string;
+    urlImage: string;
+    urlWiki: string;
+    productList : Array<Product>;
+    tagList: Array<Category>;
 }

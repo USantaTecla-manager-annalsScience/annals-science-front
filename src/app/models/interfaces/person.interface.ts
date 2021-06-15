@@ -1,8 +1,13 @@
+import { Category } from "./category.interface";
+
 export interface Person{
+    id?: string;
     name: string;
     surname: string;
-    birth?: string;
-    deadth?: string;
+    birthDate?: string;
+    deadthDate?: string;
     description?: string;
-    image: string;
+    urlImage: string;
+    urlWiki: string;
+    categoryList: Array<Category>;
 }

@@ -1,8 +1,16 @@
+import { Category } from "./category.interface";
+import { Entity } from "./entity.interface";
+import { Person } from "./person.interface";
+
 export interface Product{
+    id?: string;
     name: string;
-    surname: string;
-    birth?: string;
-    deadth?: string;
+    creationDate: string;
+    endDate?: string;
     description?: string;
-    image: string;
+    urlImage: string;
+    urlWiki: string;
+    entityList: Array<Entity>;
+    personList: Array<Person>;
+    categoryList: Array<Category>;
 }
