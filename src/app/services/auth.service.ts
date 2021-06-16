@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserInput } from '../models/interfaces/user.interface';
+import { UserInput, UserLoginInput } from '../models/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,15 @@ export class AuthService {
  
   register(user: UserInput): Observable<any> {
     return this._http.post(environment.annalsScienceUrl + '/users', user);
+  }
+
+  login(user: UserLoginInput): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+      .set('Authorization', 'Basic ' + window.btoa(user.email + ':' + user.password));
+
+    return this._http.post(environment.annalsScienceUrl + '/users/login', {}, {
+      headers,
+      responseType: 'text'
+    });
   }
 }

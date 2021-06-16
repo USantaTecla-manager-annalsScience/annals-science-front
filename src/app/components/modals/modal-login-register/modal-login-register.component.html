@@ -1,20 +1,10 @@
 <app-modal-template (event)=manageButtonsModal($event)>
-    <!-- <form [formGroup]="modalForm" modal>
-        <div *ngFor="let item of _Header">
-            <div *ngIf="item.isInput" class="mb-3 row">
-                <label  class="col-sm-2 col-form-label">{{item?.value}}</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control-plaintext" [formControlName]="item?.field">
-                </div>
-            </div>
-        </div>
-    </form> -->
     <mat-dialog-content [formGroup]="modalForm" modal>
         <h2 mat-dialog-title>{{data.title}}</h2>
         <div *ngFor="let item of _Header">
             <mat-form-field >
                 <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" (input)="onPasswordInput()">
-                <mat-error *ngIf="item.field === 'passwordRepeat'">Las contraseñas no coinciden</mat-error>
+                <mat-error *ngIf="item?.field === 'passwordRepeat'">Las contraseñas no coinciden</mat-error>
             </mat-form-field>
         </div>
     </mat-dialog-content>

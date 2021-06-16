@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  annalsScienceUrl: 'http://default:8080'
+  annalsScienceUrl: 'https://default:8080'
 };
 
 /*

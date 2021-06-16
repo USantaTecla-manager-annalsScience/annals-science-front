@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  annalsScienceUrl: 'http://produrl:8080'
+  annalsScienceUrl: 'https://produrl:8080'
 };

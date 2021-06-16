@@ -29,21 +29,34 @@ export class HomeViewComponent implements OnInit {
 
   manageButtonsHeader(text: string){
     if(text === 'login'){
-      this.openModal(LOGIN_FORM.CONF, 'Inicio de Sesión', HEADER_LOGIN);
+      this.openModal(LOGIN_FORM.CONF, 'Inicio de Sesión', HEADER_LOGIN, this.callbackLogin);
     }else{
-      this.openModal(REGISTER_FORM.CONF, 'Registro', HEADER_REGISTER);
+      this.openModal(REGISTER_FORM.CONF, 'Registro', HEADER_REGISTER, this.callbackRegistro);
     }
   }
 
-  openModal(formConf: any, title: string, header: any[]){
+  callbackLogin(){
+    console.log(" login")
+  }
+
+  callbackRegistro(){
+    console.log(" registro")
+       // if(title == 'Registro'){
+    //   this._authService.register(this.inputUser).subscribe(res => {
+    //     console.log('respuesta');
+    //     console.log(res);
+    //   })
+  }
 
 
+  openModal(formConf: any, title: string, header: any[], callback:Function){
     const dialogRef = this.modal.open(ModalLoginRegisterComponent, {
       width: '300px',
       data: { 
         modalFormConf: formConf,
         header: header,
-        title: title
+        title: title,
+        callback: callback
       }
     });
     dialogRef.afterClosed().subscribe((res: any) => {
@@ -54,11 +67,14 @@ export class HomeViewComponent implements OnInit {
         email: res.value.email,
         password: res.value.password
       };
-
-      this._authService.register(this.inputUser).subscribe(res => {
-        console.log(res);
-      })
+      this.performModalActionRegister(res, callback);
     });
+  }
+
+  
+
+  performModalActionRegister(res: any, callback: Function){
+    callback();
   }
 
 
