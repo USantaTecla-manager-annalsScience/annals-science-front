@@ -14,7 +14,7 @@
         <div *ngFor="let item of _Header">
             <mat-form-field >
                 <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" (input)="onPasswordInput()">
-                <mat-error *ngIf="item.field === 'repeatPassword' && item?.field.invalid">Las contraseñas no coinciden</mat-error>
+                <mat-error *ngIf="item.field === 'passwordRepeat'">Las contraseñas no coinciden</mat-error>
             </mat-form-field>
         </div>
     </mat-dialog-content>
