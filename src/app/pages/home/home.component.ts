@@ -36,6 +36,8 @@ export class HomeViewComponent implements OnInit {
   }
 
   openModal(formConf: any, title: string, header: any[]){
+
+
     const dialogRef = this.modal.open(ModalLoginRegisterComponent, {
       width: '300px',
       data: { 
@@ -58,4 +60,6 @@ export class HomeViewComponent implements OnInit {
       })
     });
   }
+
+
 }
