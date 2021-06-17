@@ -14,6 +14,7 @@ import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-v
 export class HomeViewComponent implements OnInit {
 
   _dataEntity = DATA_ENTITY;
+  loggedButton = false;
 
 
   constructor(private modal: MatDialog, private _authService: AuthService) { }
@@ -43,6 +44,20 @@ export class HomeViewComponent implements OnInit {
     });
   }
 
+  openLoginModal() {
+    const dialogRef = this.modal.open(ModalLoginComponent, {
+      width: '300px',
+      data: {
+        header: HEADER_LOGIN,
+        title: 'Inicio de Sesión',
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      this.callbackLogin(res);
+    });
+  }
+
   callbackLogin(res?: any) {
     const inputUser: User = {
       email: res.value.email,
@@ -51,6 +66,7 @@ export class HomeViewComponent implements OnInit {
 
     this._authService.login(inputUser).subscribe(res => {
       console.log(res);
+      this.loggedButton = true;
     })
   }
 
@@ -67,18 +83,5 @@ export class HomeViewComponent implements OnInit {
     })
   }
 
-  openLoginModal() {
-    const dialogRef = this.modal.open(ModalLoginComponent, {
-      width: '300px',
-      data: {
-        header: HEADER_LOGIN,
-        title: 'Inicio de Sesión',
-      }
-    });
 
-    dialogRef.afterClosed().subscribe((res: any) => {
-      console.log(res);
-      this.callbackRegistro(res);
-    });
-  }
 }
