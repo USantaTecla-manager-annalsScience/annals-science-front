@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { of } from 'rxjs';
-import { ModalLoginRegisterComponent } from 'src/app/components/modals/modal-login-register/modal-login-register.component';
-import { LOGIN_FORM, REGISTER_FORM } from 'src/app/models/forms.constant';
+import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
+import { ModalLoginComponent } from 'src/app/components/modals/modal-login/modal-login.component';
 import { User, UserInput } from 'src/app/models/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-view';
@@ -15,67 +14,71 @@ import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-v
 export class HomeViewComponent implements OnInit {
 
   _dataEntity = DATA_ENTITY;
-  inputUser: UserInput = {
-    name: '',
-    surname:'',
-    email:'',
-    password:''
-  };
 
-  constructor(private modal: MatDialog, private _authService : AuthService) { }
+
+  constructor(private modal: MatDialog, private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  manageButtonsHeader(text: string){
-    if(text === 'login'){
-      this.openModal(LOGIN_FORM.CONF, 'Inicio de Sesión', HEADER_LOGIN, this.callbackLogin);
-    }else{
-      this.openModal(REGISTER_FORM.CONF, 'Registro', HEADER_REGISTER, this.callbackRegistro);
+  manageButtonsHeader(text: string) {
+    if (text === 'login') {
+      this.openLoginModal();
+    } else {
+      this.openRegisterModal();
     }
   }
 
-  callbackLogin(){
-    console.log(" login")
-  }
-
-  callbackRegistro(){
-    console.log(" registro")
-       // if(title == 'Registro'){
-    //   this._authService.register(this.inputUser).subscribe(res => {
-    //     console.log('respuesta');
-    //     console.log(res);
-    //   })
-  }
-
-
-  openModal(formConf: any, title: string, header: any[], callback:Function){
-    const dialogRef = this.modal.open(ModalLoginRegisterComponent, {
+  openRegisterModal() {
+    const dialogRef = this.modal.open(ModalRegisterComponent, {
       width: '300px',
-      data: { 
-        modalFormConf: formConf,
-        header: header,
-        title: title,
-        callback: callback
+      data: {
+        header: HEADER_REGISTER,
+        title: 'Registro',
       }
     });
+
     dialogRef.afterClosed().subscribe((res: any) => {
-      console.log(res);
-      this.inputUser = {
-        name: res.value.name,
-        surname: res.value.surname,
-        email: res.value.email,
-        password: res.value.password
-      };
-      this.performModalActionRegister(res, callback);
+      this.callbackRegistro(res);
     });
   }
 
-  
+  callbackLogin(res?: any) {
+    const inputUser: User = {
+      email: res.value.email,
+      password: res.value.password
+    };
 
-  performModalActionRegister(res: any, callback: Function){
-    callback();
+    this._authService.login(inputUser).subscribe(res => {
+      console.log(res);
+    })
   }
 
+  callbackRegistro(res?: any) {
+    const inputUser: User = {
+      email: res.value.email,
+      name: res.value.name,
+      surname: res.value.surname,
+      password: res.value.password
+    }
 
+    this._authService.register(inputUser).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  openLoginModal() {
+    const dialogRef = this.modal.open(ModalLoginComponent, {
+      width: '300px',
+      data: {
+        header: HEADER_LOGIN,
+        title: 'Inicio de Sesión',
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      console.log(res);
+      this.callbackRegistro(res);
+    });
+  }
 }

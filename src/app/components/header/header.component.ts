@@ -12,7 +12,6 @@ export class HeaderComponent{
   constructor() { }
 
   onClick(text: string){
-    console.log(text);
     this.event.emit(text);
   }
 

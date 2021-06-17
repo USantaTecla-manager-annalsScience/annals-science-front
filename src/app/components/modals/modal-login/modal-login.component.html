@@ -3,8 +3,8 @@
         <h2 mat-dialog-title>{{data.title}}</h2>
         <div *ngFor="let item of _Header">
             <mat-form-field >
-                <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" (input)="onPasswordInput()">
-                <mat-error *ngIf="item?.field === 'passwordRepeat'">Las contraseñas no coinciden</mat-error>
+                <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" [type]="getInputTye(item)" >
+                <mat-error *ngIf="item.field === 'email'">Email inválido</mat-error>
             </mat-form-field>
         </div>
     </mat-dialog-content>

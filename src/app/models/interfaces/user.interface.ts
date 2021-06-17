@@ -1,10 +1,10 @@
 
 export interface User{
-    name: string;
-    surname: string;
+    name?: string;
+    surname?: string;
     email: string;
     password: string;
-    passwordRepeat: string;
+    passwordRepeat?: string;
 }
 
 export interface UserInput{

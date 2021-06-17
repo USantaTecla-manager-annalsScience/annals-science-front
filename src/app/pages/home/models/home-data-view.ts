@@ -18,14 +18,14 @@ export const DATA_ENTITY = [{
 ];
 
 export const HEADER_LOGIN: any[] = [
-    { field: 'email', value: 'Email: ', isInput: true },
-    { field: 'password', value: 'Contraseña: ', isInput: true }
+    { field: 'email', value: 'Email: ', isInput: true , type: 'text'},
+    { field: 'password', value: 'Contraseña: ', isInput: true, type : 'password' }
 ];
 
 export const HEADER_REGISTER: any[] = [
-    { field: 'name', value: 'Nombre', isInput: true },
-    { field: 'surname', value: 'Apellido', isInput: true },
-    { field: 'email', value: 'Email: ', isInput: true },
-    { field: 'password', value: 'Contraseña: ', isInput: true },
-    { field: 'passwordRepeat', value: 'Repita contraseña', isInput: true }
+    { field: 'name', value: 'Nombre', isInput: true , type: 'text' },
+    { field: 'surname', value: 'Apellido', isInput: true , type:'text'},
+    { field: 'email', value: 'Email: ', isInput: true ,type:'text' },
+    { field: 'password', value: 'Contraseña: ', isInput: true, type:'password' },
+    { field: 'passwordRepeat', value: 'Repita contraseña', isInput: true, type:'password' }
 ];

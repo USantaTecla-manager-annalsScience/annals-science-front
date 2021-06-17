@@ -6,13 +6,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { ModalLoginRegisterComponent } from 'src/app/components/modals/modal-login-register/modal-login-register.component';
+import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
 import { ModalTemplateComponent } from 'src/app/components/modals/modal-template/modal-template.component';
 import { HomeViewComponent } from './home.component';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalLoginComponent } from 'src/app/components/modals/modal-login/modal-login.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthService } from 'src/app/services/auth.service';
     FooterComponent,
     HomeViewComponent,
     ModalTemplateComponent,
-    ModalLoginRegisterComponent,
+    ModalRegisterComponent,
+    ModalLoginComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,7 @@ import { AuthService } from 'src/app/services/auth.service';
     HttpClientModule
     
   ],
-  entryComponents:[ModalLoginRegisterComponent],
+  entryComponents:[ModalRegisterComponent],
   providers:[AuthService]
 })
 export class HomeModule { }
