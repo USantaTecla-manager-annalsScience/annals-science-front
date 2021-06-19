@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
 import { ModalLoginComponent } from 'src/app/components/modals/modal-login/modal-login.component';
-import { User, UserInput } from 'src/app/models/interfaces/user.interface';
+import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
+import { User } from 'src/app/models/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-view';
 
@@ -23,10 +23,12 @@ export class HomeViewComponent implements OnInit {
   }
 
   manageButtonsHeader(text: string) {
-    if (text === 'login') {
+    if (text === 'Login') {
       this.openLoginModal();
-    } else {
+    } else if(text ==='register'){
       this.openRegisterModal();
+    }else{
+      this.loggedButton = !this.loggedButton;
     }
   }
 
@@ -40,7 +42,9 @@ export class HomeViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      this.callbackRegistro(res);
+      if(res){
+        this.callbackRegistro(res);
+      }
     });
   }
 
@@ -54,7 +58,9 @@ export class HomeViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      this.callbackLogin(res);
+      if(res){
+        this.callbackLogin(res);
+      }
     });
   }
 

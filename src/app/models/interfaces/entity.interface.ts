@@ -1,4 +1,5 @@
 import { Category } from "./category.interface";
+import { Person } from "./person.interface";
 import { Product } from "./product.interface";
 
 export interface Entity{
@@ -9,6 +10,6 @@ export interface Entity{
     description?: string;
     urlImage: string;
     urlWiki: string;
-    productList : Array<Product>;
-    tagList: Array<Category>;
+    personList : Array<Person>;
+    categoryList: Array<Category>;
 }

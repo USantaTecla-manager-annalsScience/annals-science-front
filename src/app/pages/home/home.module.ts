@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCommonModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
 import { ModalTemplateComponent } from 'src/app/components/modals/modal-template/modal-template.component';
@@ -14,19 +13,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalLoginComponent } from 'src/app/components/modals/modal-login/modal-login.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    FooterComponent,
     HomeViewComponent,
     ModalTemplateComponent,
     ModalRegisterComponent,
-    ModalLoginComponent
+    ModalLoginComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
