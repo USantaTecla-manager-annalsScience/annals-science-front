@@ -19,7 +19,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit{
   title = 'annals-science-front';
   url = environment.annalsScienceUrl;
-  loggedButton = false;
+  isLogged = false;
   userRegisteredInput: UserInput = {
     name: '',
     surname: '',
@@ -31,7 +31,8 @@ export class AppComponent implements OnInit{
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.checkLogin();  }
+    this.checkLogin();  
+  }
 
   manageButtonsHeader(text: string) {
 
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit{
 
   logoutUser(){
     sessionStorage.removeItem('token');
-    this.loggedButton = !this.loggedButton;
+    this.isLogged = false;
     this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged out", duration: 3000 });
   }
 
@@ -93,7 +94,7 @@ export class AppComponent implements OnInit{
 
     this._authService.login(inputUser).subscribe(res => {
       sessionStorage.setItem('token',res);
-      this.loggedButton = true;
+      this.isLogged = true;
       
       this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged", duration: 3000 });
 
@@ -125,7 +126,7 @@ export class AppComponent implements OnInit{
   }
 
   checkLogin(){
-    this.loggedButton = this.getToken ? true : false;
+    this.isLogged = this.getToken() ? true : false;
   }
 }
 

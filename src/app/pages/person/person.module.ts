@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { PersonCreateEditModule } from './person-create-edit/person-create-edit.module';
 import { PersonService } from './services/person.service';
-import { RouterModule } from '@angular/router';
+
 
 
 
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     PersonCreateEditModule,
-    RouterModule
+    RouterModule,
   ],
   providers:[PersonService]
 })
