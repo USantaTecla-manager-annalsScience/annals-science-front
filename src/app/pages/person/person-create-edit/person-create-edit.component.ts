@@ -19,7 +19,7 @@ export class PersonCreateEditComponent implements OnInit {
 
   personForm: FormGroup;
   categoryData: categoryOutpuMap [] = [];
-  selectedItem = [];
+  selectedItem = new Set();
   personInput: any = {
     name: '',
     surname: '',
@@ -93,7 +93,7 @@ export class PersonCreateEditComponent implements OnInit {
   }
 
   getSelectedItem(item: any){
-    this.selectedItem.push(item[0]);
+    this.selectedItem.add(item[0]);
   }
 
 }
