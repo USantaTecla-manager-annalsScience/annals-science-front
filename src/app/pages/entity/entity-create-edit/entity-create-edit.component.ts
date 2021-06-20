@@ -9,25 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EntityCreateEditComponent implements OnInit {
 
   entityForm: FormGroup;
-  entityData = [{
-    "id": 6,
-    "name": "sergio",
-    "surname": "garcia",
-    "birthDate": null,
-    "deathDate": "nuncaa",
-    "description": "dees",
-    "imageUrl": "imageUrl...",
-    "wikiUrl": "wikiUrl...",
-    "categories": [
-      {
-        "id": 5,
-        "name": "casii5l5a9",
-        "parentId": null
-      }
-    ]
-  }];
-
+  entityData : any [] = [];
   categoryData : any[] = [];
+  personData : any[] = [];
+
 
   constructor(private fb: FormBuilder) {
   }
@@ -41,12 +26,12 @@ export class EntityCreateEditComponent implements OnInit {
     this.entityForm = this.fb.group({
       name: ['', Validators.required],
       creationDate: [''],
-      deathDate: [''],
+      endDate: [''],
       description: [''],
       imageUrl: [''],
       wikiUrl: [''],
-      personList: [''],
-      categoryList: ['']
+      personsId: [''],
+      categoriesId: ['']
     });
   }
 

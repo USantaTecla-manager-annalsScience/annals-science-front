@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-6">
                             <label>Fecha de finalización:</label>
-                            <input type="text" class="form-control" formControlName="deathDate" placeholder="">
+                            <input type="text" class="form-control" formControlName="endDate" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     <div class="row">
                         <div class="col-6">
                             <label for="exampleFormControlSelect1">Categorias:</label>
-                            <select class="form-control" formControlName="categoryList">
+                            <select class="form-control" formControlName="categoriesId">
                                 <option *ngFor="let item of categoryData" [value]="item.id">{{item.name}}</option>
                             </select>
                         </div>
                         <div class="col-6">
                             <label for="exampleFormControlSelect1">Personas: </label>
-                            <select class="form-control" formControlName="personList">
-                                <!-- <option *ngFor="let item of categoryData"  [value]="item.id">{{item.name}}</option> -->
+                            <select class="form-control" formControlName="personsId">
+                                <!-- <option *ngFor="let item of personData"  [value]="item.id">{{item.name}}</option> -->
                                 <option>1</option>
                             </select>
                         </div>

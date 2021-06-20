@@ -9,3 +9,11 @@ button{
 .card{
    margin-bottom: 20px;
 }
+
+p{
+   margin:0px;
+}
+
+.selected-item-container{
+   overflow-y: auto;
+}

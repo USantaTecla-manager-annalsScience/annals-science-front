@@ -1,11 +1,12 @@
-<app-modal-template (event)=manageButtonsModal($event)>
+<app-modal-template (event)=manageButtonsModal($event) [buttonType] = "'Aceptar'" [disabled]="getButtonStatus()">
     <mat-dialog-content [formGroup]="modalForm" modal>
         <h2 mat-dialog-title>{{data.title}}</h2>
         <div *ngFor="let item of _Header">
             <mat-form-field >
-                <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" [type]="getInputTye(item)" >
-                <mat-error *ngIf="item.field === 'email'">Email inválido</mat-error>
-            </mat-form-field>
+                <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" [type]="getInputTye(item)" required>
+                <mat-error *ngIf="modalForm.get('email').invalid && item.field === 'email'">{{getErrorEmailMessage()}}</mat-error>
+                <mat-error *ngIf="modalForm.invalid && item.field !== 'email'">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>           
         </div>
     </mat-dialog-content>
 </app-modal-template>

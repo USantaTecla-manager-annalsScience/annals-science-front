@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.checkLogin();  
+        this.checkLogin();  
   }
 
   manageButtonsHeader(text: string) {

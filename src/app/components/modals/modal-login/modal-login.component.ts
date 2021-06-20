@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 
 @Component({
   selector: 'app-modal-login',
@@ -35,7 +34,7 @@ export class ModalLoginComponent implements OnInit {
   }
 
   manageButtonsModal(text: string) {
-    if (text === 'save' && this.modalForm.valid) {
+    if (text === 'save') {
       this.onSubmit();
     } else {
       this.dialogRef.close();
@@ -48,6 +47,19 @@ export class ModalLoginComponent implements OnInit {
 
   getInputTye(item: any){
     return item.type;
+  }
+
+  getButtonStatus(): boolean{
+    return this.modalForm.valid;
+  }
+
+  
+  getErrorMessage() {
+    return 'Debe introducir un valor'
+  }
+
+  getErrorEmailMessage(){
+    return this.modalForm.get('email').hasError('email') ? 'Email no válido' : '';
   }
 
 }

@@ -1,8 +1,8 @@
 <div>
     <ng-content select="[modal]"></ng-content>
     <div class="modal__buttons">
-      <button   type="button" class="btn btn-primary" (click)="manageButtons('save')" >
-       Guardar</button>
+      <button  [disabled]="!disabled" type="button" class="btn btn-primary" (click)="manageButtons('save')" >
+       {{buttonType}}</button>
         <button type="button" class="btn btn-outline-secondary" (click)="manageButtons('close')"> Cancelar</button>
     </div>
   </div>

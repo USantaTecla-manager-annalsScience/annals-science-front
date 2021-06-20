@@ -4,12 +4,12 @@ export const DATA_ENTITY: Entity[] = [{
     id: '1',
     name: 'Entidad1',
     creationDate: '01/05/2005',
-    deathDate: '',
+    endDate: '20/01/2010',
     imageUrl: '',
     wikiUrl: '',
     description: 'Esto es una prueba de una entidad',
-    personList: [],
-    categoryList: []
+    personsId: [],
+    categoriesId: []
 }, {
     id: '2',
     name: 'Entidad2',
@@ -17,8 +17,8 @@ export const DATA_ENTITY: Entity[] = [{
     description: 'Esto es una prueba de una entidad',
     imageUrl: '',
     wikiUrl: '',
-    personList: [],
-    categoryList: []
+    personsId: [],
+    categoriesId: []
 }, {
     id: '3',
     name: 'Entidad3',
@@ -26,8 +26,8 @@ export const DATA_ENTITY: Entity[] = [{
     description: 'Esto es una prueba de una entidad',
     imageUrl: '',
     wikiUrl: '',
-    personList: [],
-    categoryList: []
+    personsId: [],
+    categoriesId: []
 }
 ];
 

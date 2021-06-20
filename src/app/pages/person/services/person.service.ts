@@ -15,7 +15,11 @@ export class PersonService {
     return this._http.get(environment.annalsScienceUrl + '/persons');
   }
 
-  addPerson(person: PersonInputMap): Observable<any> {
+  addPerson(person: any): Observable<any> {
+    const categories = person['categoriesId'];
+    const parseCategories = categories.map(item => item.id);
+    person['categoriesId'] = parseCategories;
+
     return this._http.post(environment.annalsScienceUrl + '/persons', person);
   }
 

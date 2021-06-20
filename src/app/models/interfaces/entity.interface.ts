@@ -6,10 +6,10 @@ export interface Entity{
     id?: string;
     name: string;
     creationDate?: string;
-    deathDate?: string;
+    endDate?: string;
     description?: string;
     imageUrl: string;
     wikiUrl: string;
-    personList : Array<Person>;
-    categoryList: Array<Category>;
+    personsId : Array<Person>;
+    categoriesId: Array<Category>;
 }

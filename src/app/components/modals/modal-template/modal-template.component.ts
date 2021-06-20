@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class ModalTemplateComponent{
 
   @Output() event = new EventEmitter<string>();
+  @Input() buttonType:string;
+  @Input() disabled: boolean;
 
   constructor() { }
 

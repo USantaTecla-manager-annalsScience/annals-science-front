@@ -25,28 +25,26 @@ export class ModalRegisterComponent implements OnInit {
     this.title = this.data.title;
     this._Header = this.data.header;
     this.formBuilder();
+    this.modalForm.get('email').setValidators(Validators.email);
   }
 
   formBuilder() {
-    if (this.title === 'Registro') {
-      this.modalForm = this.fb.group({
-        name: ['', Validators.required],
-        surname: ['', Validators.required],
-        email: ['', [Validators.required]],
-        password: ['', Validators.required],
-        passwordRepeat: ['', [Validators.required]]
-      }, { validator: passwordMatchValidator });
-    } else {
-      this.modalForm = this.fb.group(LOGIN_FORM.CONF);
-    }
+    this.modalForm = this.fb.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password: ['', Validators.required],
+      passwordRepeat: ['', [Validators.required]]
+    }, { validator: passwordMatchValidator });
   }
 
 
+
   manageButtonsModal(text: string) {
-    if (text === 'save' && this.modalForm.valid) {
+    if (text === 'save') {
       this.onSubmit();
     } else {
-      this.dialogRef.close('close');
+      this.dialogRef.close();
     }
   }
 
@@ -61,8 +59,22 @@ export class ModalRegisterComponent implements OnInit {
       this.modalForm.get('passwordRepeat').setErrors(null);
   }
 
-  getInpuType(item: any){
+  getInpuType(item: any) {
     return item.type;
+  }
+
+
+  getButtonStatus(): boolean {
+    return this.modalForm.valid;
+  }
+
+  getErrorMessage() {
+    return 'Debe introducir un valor'
+  }
+
+  getErrorEmailMessage() {
+
+    return this.modalForm.get('email').hasError('email') ? 'Email no válido' : '';
   }
 
 }

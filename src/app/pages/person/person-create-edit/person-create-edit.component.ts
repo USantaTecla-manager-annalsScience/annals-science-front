@@ -19,7 +19,8 @@ export class PersonCreateEditComponent implements OnInit {
 
   personForm: FormGroup;
   categoryData: categoryOutpuMap [] = [];
-  personInput: PersonInputMap = {
+  selectedItem = [];
+  personInput: any = {
     name: '',
     surname: '',
     birthDate: '',
@@ -45,13 +46,17 @@ export class PersonCreateEditComponent implements OnInit {
       description: [''],
       imageUrl: [''],
       wikiUrl: [''],
-      categoriesId: [''],
+      categoriesId: [{}],
     });
   }
 
   getCategories(){
     this._categoryService.getCategories().subscribe(data => {
       this.categoryData = data;
+    },err =>{
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+
     })
   }
 
@@ -70,17 +75,25 @@ export class PersonCreateEditComponent implements OnInit {
        this.messageError = "You don't have permission for this operation"
      }
      this._snackBar.openFromComponent(SnackbarComponent, { data: this.messageError, duration: 3000 });
-
+     console.log(err);
     })
   }
 
   getInputForm() {
-    console.log(this.personForm);
     Object.keys(this.personForm.controls).forEach(key => {
       if (this.personForm.get(key).value !== '') {
         this.personInput[key] = this.personForm.get(key)?.value;
       }
     })
+    this.personInput['categoriesId'] = this.selectedItem;
+  }
+
+  setCategories(){
+    
+  }
+
+  getSelectedItem(item: any){
+    this.selectedItem.push(item[0]);
   }
 
 }
