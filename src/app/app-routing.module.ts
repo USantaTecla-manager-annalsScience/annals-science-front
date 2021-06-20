@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CategoryCreateEditComponent } from "./pages/category-create-edit/category-create-edit.component";
+import { CategoryCreateEditComponent } from "./pages/category/category-create-edit/category-create-edit.component";
 import { EntityCreateEditComponent } from "./pages/entity-create-edit/entity-create-edit.component";
 import { HomeViewComponent } from "./pages/home/home.component";
 

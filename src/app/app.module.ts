@@ -15,13 +15,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { ModalLoginComponent } from './components/modals/modal-login/modal-login.component';
 import { ModalRegisterComponent } from './components/modals/modal-register/modal-register.component';
 import { ModalTemplateComponent } from './components/modals/modal-template/modal-template.component';
-import { CategoryCreateEditModule } from './pages/category-create-edit/category-create-edit.module';
 import { EntityCreateEditModule } from './pages/entity-create-edit/entity-create-edit.module';
 import { EntityDetailModule } from './pages/entity/entity-detail/entity-detail.module';
 import { EntityViewModule } from './pages/entity/entity.module';
 import { HomeModule } from './pages/home/home.module';
 import { AuthInterceptorService } from './services/interceptor.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { CategoryCreateEditModule } from './pages/category/category-create-edit/category-create-edit.module';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 
 
@@ -34,8 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ModalRegisterComponent,
     ModalLoginComponent,
     HeaderComponent,
-    
-
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +62,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     useClass: AuthInterceptorService,
     multi: true
   }],
-  entryComponents:[ModalRegisterComponent],
+  entryComponents:[ModalRegisterComponent, SnackbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

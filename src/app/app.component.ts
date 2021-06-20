@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from "../environments/environment";
 import { ModalLoginComponent } from './components/modals/modal-login/modal-login.component';
 import { ModalRegisterComponent } from './components/modals/modal-register/modal-register.component';
-import { User } from './models/interfaces/user.interface';
-import { HEADER_REGISTER, HEADER_LOGIN } from './pages/home/models/home-data-view';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { User, UserInput } from './models/interfaces/user.interface';
+import { HEADER_LOGIN, HEADER_REGISTER } from './pages/home/models/home-data-view';
 import { AuthService } from './services/auth.service';
 
 
@@ -18,18 +20,33 @@ export class AppComponent {
   title = 'annals-science-front';
   url = environment.annalsScienceUrl;
   loggedButton = false;
+  userRegisteredInput: UserInput = {
+    name: '',
+    surname: '',
+    email: '',
+    password: ''
+  };
 
-  constructor(private modal: MatDialog, private _authService: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(private modal: MatDialog, private _authService: AuthService, 
+    private _snackBar: MatSnackBar) { }
 
 
   manageButtonsHeader(text: string) {
-    if (text === 'Login') {
-      this.openLoginModal();
-    } else if (text === 'register') {
-      this.openRegisterModal();
-    } else {
-      this.loggedButton = !this.loggedButton;
+
+    const fn = {
+      Login: 'openLoginModal',
+      register: 'openRegisterModal',
+      Logout: 'logoutUser'
     }
+
+    const functionName = fn[text];
+    this[functionName]();
+  }
+
+  logoutUser(){
+    localStorage.removeItem('token');
+    this.loggedButton = !this.loggedButton;
+    this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged out", duration: 3000 });
   }
 
   openRegisterModal() {
@@ -41,11 +58,12 @@ export class AppComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((res: any) => {
-      if (res) {
+    dialogRef.afterClosed().subscribe((res: FormGroup) => {
+      if(res){
         this.callbackRegistro(res);
       }
-    });
+    },
+   );
   }
 
   openLoginModal() {
@@ -72,32 +90,30 @@ export class AppComponent {
     };
 
     this._authService.login(inputUser).subscribe(res => {
-      console.log('estado', res.status);
       this.loggedButton = true;
-      this._snackBar.open('User logged', 'Close')
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged", duration: 3000 });
 
     },
       err => {
-        this._snackBar.open('An error occurs', 'Close')
-
-       
+        this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs" , duration: 3000});
+        console.log(err);
       }
     );
 
   }
 
 
+  callbackRegistro(res: FormGroup) {
+    console.log(res);
+    Object.keys(this.userRegisteredInput).forEach(key=>{
+      this.userRegisteredInput[key] = res.get(key)?.value;
+    })
+    this._authService.register(this.userRegisteredInput).subscribe(res => {
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "User registered", duration: 3000 });
+    },err => {
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
 
-  callbackRegistro(res?: any) {
-    const inputUser: User = {
-      email: res.value.email,
-      name: res.value.name,
-      surname: res.value.surname,
-      password: res.value.password
-    }
-
-    this._authService.register(inputUser).subscribe(res => {
-      console.log(res);
     })
   }
 }

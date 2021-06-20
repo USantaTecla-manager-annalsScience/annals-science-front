@@ -14,7 +14,7 @@
 
     <div class="col-md-3 text-end">
       <button type="button" class="btn btn-outline-primary me-2" (click)="onClick(loggedButton)">{{loggedButton}}</button>
-      <button type="button" class="btn btn-primary" (click)="onClick('register')">Registro</button>
+      <button [hidden] = "loggedButton === 'Logout'" type="button" class="btn btn-primary" (click)="onClick('register')">Registro</button>
     </div>
   </header>
 </div>
