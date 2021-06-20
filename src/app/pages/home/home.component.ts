@@ -14,80 +14,11 @@ import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-v
 export class HomeViewComponent implements OnInit {
 
   _dataEntity = DATA_ENTITY;
-  loggedButton = false;
 
 
-  constructor(private modal: MatDialog, private _authService: AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  manageButtonsHeader(text: string) {
-    if (text === 'Login') {
-      this.openLoginModal();
-    } else if(text ==='register'){
-      this.openRegisterModal();
-    }else{
-      this.loggedButton = !this.loggedButton;
-    }
-  }
-
-  openRegisterModal() {
-    const dialogRef = this.modal.open(ModalRegisterComponent, {
-      width: '300px',
-      data: {
-        header: HEADER_REGISTER,
-        title: 'Registro',
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((res: any) => {
-      if(res){
-        this.callbackRegistro(res);
-      }
-    });
-  }
-
-  openLoginModal() {
-    const dialogRef = this.modal.open(ModalLoginComponent, {
-      width: '300px',
-      data: {
-        header: HEADER_LOGIN,
-        title: 'Inicio de Sesión',
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((res: any) => {
-      if(res){
-        this.callbackLogin(res);
-      }
-    });
-  }
-
-  callbackLogin(res?: any) {
-    const inputUser: User = {
-      email: res.value.email,
-      password: res.value.password
-    };
-
-    this._authService.login(inputUser).subscribe(res => {
-      console.log(res);
-      this.loggedButton = true;
-    })
-  }
-
-  callbackRegistro(res?: any) {
-    const inputUser: User = {
-      email: res.value.email,
-      name: res.value.name,
-      surname: res.value.surname,
-      password: res.value.password
-    }
-
-    this._authService.register(inputUser).subscribe(res => {
-      console.log(res);
-    })
-  }
-
 
 }

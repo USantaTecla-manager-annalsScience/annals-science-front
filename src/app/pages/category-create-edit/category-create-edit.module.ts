@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CategoryCreateEditComponent } from './category-create-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CategoryCreateEditService } from './services/category-create-edit.service';
 
 
 
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule
-  ]
+  ],
+  providers:[CategoryCreateEditService]
 })
 export class CategoryCreateEditModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { categoryInputMap } from 'src/app/models/interfaces/category.interface';
 
 @Component({
   selector: 'app-category-create-edit',
@@ -15,7 +16,10 @@ export class CategoryCreateEditComponent implements OnInit {
     "parentId": null
   }];
 
-  constructor(private fb:FormBuilder) { }
+  categoryInput: categoryInputMap = {
+    name: ''
+  }
+  constructor(private fb:FormBuilder ) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -27,6 +31,10 @@ export class CategoryCreateEditComponent implements OnInit {
       name: ['', Validators.required],
       parentCategoryList: ['']
     });
+  }
+
+  onSubmit(){
+    this
   }
 
 

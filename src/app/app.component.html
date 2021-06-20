@@ -1,3 +1,13 @@
-
+<app-header (event)="manageButtonsHeader($event)" [loggedButton]="loggedButton ? 'Logout' : 'Login'"></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+
+<mat-form-field>
+    <mat-label>Message</mat-label>
+    <input matInput value="Disco party!" #message>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Action</mat-label>
+    <input matInput value="Dance" #action>
+  </mat-form-field>

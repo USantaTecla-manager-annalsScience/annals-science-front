@@ -1,34 +1,14 @@
 <div class="container">
-    <div class="container-header">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-              <i class="bi bi-bootstrap-fill me-2" width="40" height="32"></i>
-            </a>
-        
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <li><a [routerLink]="'/home'" routerLinkActive="router-link-active" class="nav-link px-2 link-secondary">Home</a></li>
-              <li><a [routerLink]="'/create-entity'" class="nav-link px-2 link-dark">Entidades</a></li>
-              <li><a href="#" class="nav-link px-2 link-dark">Productos</a></li>
-              <li><a href="#" class="nav-link px-2 link-dark">Personas</a></li>
-              <li><a  [routerLink]="'/create-cat'" class="nav-link px-2 link-dark">Categorias</a></li>
-            </ul>
-        
-            <div class="col-md-3 text-end">
-              <button type="button" class="btn btn-outline-primary me-2">Login</button>
-              <button type="button" class="btn btn-primary">Registro</button>
-            </div>
-          </header>
-    </div>
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Crear Categoria</h5>
             <form [formGroup]="categoryForm">
                 <div class="form-group">
-                    <label>Name:</label>
-                    <input type="text" class="form-control" formControlName="name" placeholder="">
-                </div>
-                <div class="form-group">
                     <div class="row">
+                        <div class="col-6">
+                            <label>Name:</label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="" required>
+                        </div>
                         <div class="col-6">
                             <label>Categorias:</label>
                             <select class="form-control" formControlName="parentCategoryList">
@@ -37,6 +17,7 @@
                         </div>
                     </div>
                 </div>
+                <button [disabled]="!categoryForm.valid" type="submit" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
             </form>
         </div>
     </div>
