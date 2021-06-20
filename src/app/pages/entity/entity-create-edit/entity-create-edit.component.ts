@@ -41,10 +41,10 @@ export class EntityCreateEditComponent implements OnInit {
     this.entityForm = this.fb.group({
       name: ['', Validators.required],
       creationDate: [''],
-      endDate: [''],
+      deathDate: [''],
       description: [''],
-      urlImage: [''],
-      urlWiki: [''],
+      imageUrl: [''],
+      wikiUrl: [''],
       personList: [''],
       categoryList: ['']
     });

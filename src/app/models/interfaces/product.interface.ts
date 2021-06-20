@@ -6,10 +6,10 @@ export interface Product{
     id?: string;
     name: string;
     creationDate: string;
-    endDate?: string;
+    deathDate?: string;
     description?: string;
-    urlImage: string;
-    urlWiki: string;
+    imageUrl: string;
+    wikiUrl: string;
     entityList: Array<Entity>;
     personList: Array<Person>;
     categoryList: Array<Category>;

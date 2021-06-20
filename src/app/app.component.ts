@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'annals-science-front';
   url = environment.annalsScienceUrl;
   loggedButton = false;
@@ -30,6 +30,8 @@ export class AppComponent {
   constructor(private modal: MatDialog, private _authService: AuthService, 
     private _snackBar: MatSnackBar) { }
 
+  ngOnInit(): void {
+    this.checkLogin();  }
 
   manageButtonsHeader(text: string) {
 
@@ -44,7 +46,7 @@ export class AppComponent {
   }
 
   logoutUser(){
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.loggedButton = !this.loggedButton;
     this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged out", duration: 3000 });
   }
@@ -90,7 +92,9 @@ export class AppComponent {
     };
 
     this._authService.login(inputUser).subscribe(res => {
+      sessionStorage.setItem('token',res);
       this.loggedButton = true;
+      
       this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged", duration: 3000 });
 
     },
@@ -104,7 +108,6 @@ export class AppComponent {
 
 
   callbackRegistro(res: FormGroup) {
-    console.log(res);
     Object.keys(this.userRegisteredInput).forEach(key=>{
       this.userRegisteredInput[key] = res.get(key)?.value;
     })
@@ -115,6 +118,14 @@ export class AppComponent {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
 
     })
+  }
+
+  getToken(): string{
+    return sessionStorage.getItem('token');
+  }
+
+  checkLogin(){
+    this.loggedButton = this.getToken ? true : false;
   }
 }
 
