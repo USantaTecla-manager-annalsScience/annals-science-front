@@ -16,4 +16,18 @@ p{
 
 .selected-item-container{
    overflow-y: auto;
+   height: 100px;
+   position: relative;
+}
+
+.select-row{
+   position:relative;
+}
+
+i{
+   margin-left: 3px;
+}
+
+i:hover{
+   color: blue;
 }

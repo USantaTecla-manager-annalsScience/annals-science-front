@@ -88,7 +88,8 @@ export class PersonCreateEditComponent implements OnInit {
     this.personInput['categoriesId'] = this.selectedItem;
   }
 
-  setCategories(){
+  onClickDelete(item){
+    this.selectedItem.delete(item);
     
   }
 

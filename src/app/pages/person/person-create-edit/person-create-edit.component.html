@@ -44,21 +44,25 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="row">
+                    <div class="row select-row">
                         <div class="col col-6">
                             <label>Categorias: </label>
-                            <select multiple class="form-control" formControlName="categoriesId" (ngModelChange)="getSelectedItem($event)">
-                                <option *ngFor="let item of categoryData" [value]="item">{{item.name}}</option>
-                            </select>
+                            <div>
+                                <select multiple class="form-control" formControlName="categoriesId"
+                                    (ngModelChange)="getSelectedItem($event)">
+                                    <option *ngFor="let item of categoryData" [value]="item">{{item.name}}</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col col-6">
                             <label>Categorias Seleccionadas: </label>
-                            <div class="selected-item-container">
+                            <div class="row selected-item-container">
                                 <p class="selectedItem" *ngFor="let item of selectedItem">
-                                    {{item.name}}
+                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                                class="bi bi-trash"></i></a></span>
                                 </p>
                             </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
                 <!-- <div class="form-group">
