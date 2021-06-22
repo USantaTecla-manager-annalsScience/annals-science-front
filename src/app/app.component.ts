@@ -9,6 +9,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { User, UserInput } from './models/interfaces/user.interface';
 import { HEADER_LOGIN, HEADER_REGISTER } from './pages/home/models/home-data-view';
 import { AuthService } from './services/auth.service';
+import { TokenService } from './services/token.service';
 
 
 @Component({
@@ -27,11 +28,12 @@ export class AppComponent implements OnInit{
     password: ''
   };
 
-  constructor(private modal: MatDialog, private _authService: AuthService, 
+  constructor(private modal: MatDialog, private _authService: AuthService,
+    private _tokenService: TokenService,
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-        this.checkLogin();  
+        this.checkLogin();
   }
 
   manageButtonsHeader(text: string) {
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit{
   }
 
   logoutUser(){
-    sessionStorage.removeItem('token');
+    this._tokenService.destroy();
     this.isLogged = false;
     this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged out", duration: 3000 });
   }
@@ -86,16 +88,16 @@ export class AppComponent implements OnInit{
   }
 
   callbackLogin(res?: any) {
-    
+
     const inputUser: User = {
       email: res.value.email,
       password: res.value.password
     };
 
     this._authService.login(inputUser).subscribe(res => {
-      sessionStorage.setItem('token',res);
+      this._tokenService.save(res);
       this.isLogged = true;
-      
+
       this._snackBar.openFromComponent(SnackbarComponent, { data: "User logged", duration: 3000 });
 
     },
@@ -122,11 +124,11 @@ export class AppComponent implements OnInit{
   }
 
   getToken(): string{
-    return sessionStorage.getItem('token');
+    return this._tokenService.get();
   }
 
   checkLogin(){
-    this.isLogged = this.getToken() ? true : false;
+    this.isLogged = this._tokenService.exist();
   }
 }
 

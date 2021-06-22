@@ -30,7 +30,7 @@ export class CategoryCreateComponent implements OnInit {
   formBuilder() {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
-      idParent: ['']
+      parentId: ['']
     });
   }
 
