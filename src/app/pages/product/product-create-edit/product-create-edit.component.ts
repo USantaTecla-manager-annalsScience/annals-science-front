@@ -5,9 +5,11 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
 import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
 import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
+import { ProductInputMap } from 'src/app/models/interfaces/product.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { EntityService } from '../../entity/services/entity.service';
 import { PersonService } from '../../person/services/person.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product-create-edit',
@@ -17,6 +19,17 @@ import { PersonService } from '../../person/services/person.service';
 export class ProductCreateEditComponent implements OnInit {
 
   productForm: FormGroup;
+  productInput: any = {
+    name:'',
+    creationDate: '',
+    endDate: '',
+    description: '',
+    imageUrl: '',
+    wikiUrl:'',
+    personsId: [],
+    categoriesId: [],
+    entitiesId: []
+  }
   categoryList : CategoryOutpuMap[] = [];
   personList : PersonOutputMap[] = [];
   entityList: EntityOutPutMap[]=[];
@@ -26,7 +39,7 @@ export class ProductCreateEditComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _entityService: EntityService
-    , private _personService: PersonService, private _snackBar: MatSnackBar) { }
+    , private _personService: PersonService, private _snackBar: MatSnackBar, private _productService: ProductService) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -48,7 +61,9 @@ export class ProductCreateEditComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    console.log('aqui');
+    this.getProductInput();
+    this.createProduct();
   }
 
   getInitialValues(){
@@ -57,6 +72,17 @@ export class ProductCreateEditComponent implements OnInit {
     this.getPersonList();
   }
 
+  getProductInput(){
+    Object.keys(this.productForm.controls).forEach(key =>{
+      this.productInput[key] = this.productForm.get(key).value;
+    })
+
+    this.productInput['categoriesId'] = this.selectedCategories ? this.selectedCategories : '';
+    this.productInput['personsId'] = this.selectedPersons ? this.selectedPersons : '';
+    this.productInput['entitiesId'] = this.selectedEntities ? this.selectedEntities : '';
+
+
+  }
   getCategoryList(){
     this._categoryService.getCategories().subscribe( res => {
       const catField = {isCat: true};
@@ -98,12 +124,30 @@ export class ProductCreateEditComponent implements OnInit {
     })
   }
 
-  getSelectedItem(item: any){
+  createProduct(){
+    this._productService.addProduct(this.productInput).subscribe(res =>{
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'Product added', duration: 3000 });
+     },err =>{
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
+    })
   }
 
-  onClickDelete(item: any){
+  getSelectedCategory(item: any){
+    this.selectedCategories.add(item[0]);
+  }
 
+  getSelectedEntity(item: any){
+    this.selectedEntities.add(item[0]);
+  }
+
+  getSelectedPerson(item: any){
+    this.selectedPersons.add(item[0]);
+  }
+
+  onClickDelete(item: any, list:string){
+    this[list].delete(item);
   }
 
 

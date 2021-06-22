@@ -102,6 +102,10 @@ export class EntityCreateEditComponent implements OnInit {
 
   onSubmit(){
     this.getEntityInput();
+    this.createEntity();
+  }
+
+  createEntity(){
     this._entityService.addEntity(this.entityInput).subscribe(res =>{
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'Entity added', duration: 3000 });
      },err =>{

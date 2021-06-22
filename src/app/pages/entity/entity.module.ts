@@ -17,6 +17,7 @@ import { EntityService } from './services/entity.service';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     RouterModule
   ],

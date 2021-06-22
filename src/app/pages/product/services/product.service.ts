@@ -14,7 +14,7 @@ export class ProductService {
     this.paseDataInput(product, 'categoriesId');
     this.paseDataInput(product,'personsId');
     this.paseDataInput(product,'entitiesId');
-
+    console.log(product);
     return this._http.post(environment.annalsScienceUrl + '/products', product);
   }
 
