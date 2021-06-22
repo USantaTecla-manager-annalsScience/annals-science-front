@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CategoryCreateComponent } from "./pages/category/category-create/category-create.component";
+import { CategoryViewComponent } from "./pages/category/category-view.component";
 import { EntityCreateEditComponent } from "./pages/entity/entity-create-edit/entity-create-edit.component";
 import { HomeViewComponent } from "./pages/home/home.component";
 import { PersonCreateEditComponent } from "./pages/person/person-create-edit/person-create-edit.component";
@@ -9,6 +10,7 @@ import { PersonCreateEditComponent } from "./pages/person/person-create-edit/per
 
 const routes: Routes = [
     { path: 'home', component: HomeViewComponent },
+    {path: 'cat', component: CategoryViewComponent},
     {path:'create-entity', component: EntityCreateEditComponent},
     {path:'create-cat', component: CategoryCreateComponent},
     {path:'create-person', component: PersonCreateEditComponent},
