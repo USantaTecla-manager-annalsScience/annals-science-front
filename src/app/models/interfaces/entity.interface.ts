@@ -21,6 +21,6 @@ export interface EntityInputMap{
     description?: string;
     imageUrl?: string;
     wikiUrl?: string;
-    personsId? : Array<Person>;
-    categoriesId?: Array<Category>;
+    personsId? : Array<number>;
+    categoriesId?: Array<number>;
 }

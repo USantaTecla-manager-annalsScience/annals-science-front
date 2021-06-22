@@ -84,7 +84,7 @@ export class PersonCreateEditComponent implements OnInit {
         this.personInput[key] = this.personForm.get(key)?.value;
       }
     })
-    this.personInput['categoriesId'] = this.selectedItem;
+    this.personInput['categoriesId'] = this.selectedItem ? this.selectedItem : '';
   }
 
   onClickDelete(item){

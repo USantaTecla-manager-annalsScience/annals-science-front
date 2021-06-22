@@ -17,11 +17,20 @@ import { EntityService } from '../services/entity.service';
 export class EntityCreateEditComponent implements OnInit {
 
   entityForm: FormGroup;
-  entityInput : EntityInputMap [] = [];
+  entityInput : any = {
+    name:'',
+    creationDate: '',
+    endDate: '',
+    description: '',
+    imageUrl: '',
+    wikiUrl:'',
+    personsId: [],
+    categoriesId: []
+  };
   categoryList : CategoryOutpuMap[] = [];
   personList : PersonOutputMap[] = [];
-  selectedCategories = new Set();
-  selectedPersons = new Set();
+  selectedCategories: Set<number> = new Set();
+  selectedPersons: Set<number> = new Set();
 
 
 
@@ -108,8 +117,9 @@ export class EntityCreateEditComponent implements OnInit {
       this.entityInput[key] = this.entityForm.get(key).value;
     })
 
-    this.entityInput['categoriesId'] = this.selectedCategories;
-    this.entityInput['personsId'] = this.selectedPersons;
+    this.entityInput['categoriesId'] = this.selectedCategories ? this.selectedCategories : '';
+    this.entityInput['personsId'] = this.selectedPersons ? this.selectedPersons : '';
+
   }
 
 }

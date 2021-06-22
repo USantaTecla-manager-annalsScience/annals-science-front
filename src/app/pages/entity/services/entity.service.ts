@@ -13,10 +13,9 @@ export class EntityService {
   constructor(private _http: HttpClient) {}
 
   addEntity(entity: any): Observable<any> {
-
+    console.log(entity);
     this.parseCategoriesId(entity);
     this.parsePersonsId(entity);
-    console.log(entity);
     return this._http.post(environment.annalsScienceUrl + '/entities', entity);
   }
 
@@ -28,7 +27,7 @@ export class EntityService {
 
   parsePersonsId(dataInput: any){
     const categories = [...dataInput['personsId']];
-    const parseCategories = categories.map(item => item.id);
-    dataInput['personsId'] = parseCategories;
+    const parsePerson = categories.map(item => item.id);
+    dataInput['personsId'] = parsePerson;
   }
 }
