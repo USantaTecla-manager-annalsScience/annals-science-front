@@ -1,0 +1,9 @@
+.selected-item-container{
+  overflow-y: auto;
+  max-height: 600px;
+  position: relative;
+}
+.item:hover {
+  color: gray;
+  cursor: pointer;
+}
