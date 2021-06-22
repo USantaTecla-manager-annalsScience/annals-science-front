@@ -6,11 +6,11 @@ import { categoryInputMap as CategoryInputMap, categoryOutpuMap as CategoryOutpu
 import { CategoryService } from '../services/category.service';
 
 @Component({
-  selector: 'app-category-create-edit',
-  templateUrl: './category-create-edit.component.html',
-  styleUrls: ['./category-create-edit.component.css']
+  selector: 'app-category-create',
+  templateUrl: './category-create.component.html',
+  styleUrls: ['./category-create.component.css']
 })
-export class CategoryCreateEditComponent implements OnInit {
+export class CategoryCreateComponent implements OnInit {
 
   categoryForm: FormGroup;
   categoryData: CategoryOutpuMap[] = [];

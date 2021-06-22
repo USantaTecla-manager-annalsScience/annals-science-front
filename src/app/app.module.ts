@@ -17,13 +17,11 @@ import { ModalLoginComponent } from './components/modals/modal-login/modal-login
 import { ModalRegisterComponent } from './components/modals/modal-register/modal-register.component';
 import { ModalTemplateComponent } from './components/modals/modal-template/modal-template.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { CategoryCreateEditModule } from './pages/category/category-create-edit/category-create-edit.module';
-import { EntityCreateEditModule } from './pages/entity/entity-create-edit/entity-create-edit.module';
-import { EntityDetailModule } from './pages/entity/entity-detail/entity-detail.module';
-import { EntityViewModule } from './pages/entity/entity.module';
+import { CategoryModule } from './pages/category/category.module';
+import { EntityModule } from './pages/entity/entity.module';
 import { HomeModule } from './pages/home/home.module';
-import { PersonComponent } from './pages/person/person.component';
 import { PersonModule } from './pages/person/person.module';
+import { ProductModule } from './pages/product/product.module';
 import { AuthInterceptorService } from './services/interceptor.service';
 
 
@@ -38,7 +36,6 @@ import { AuthInterceptorService } from './services/interceptor.service';
     ModalRegisterComponent,
     ModalLoginComponent,
     SnackbarComponent,
-    PersonComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,12 +43,6 @@ import { AuthInterceptorService } from './services/interceptor.service';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    HomeModule,
-    EntityViewModule,
-    EntityCreateEditModule,
-    EntityDetailModule,
-    CategoryCreateEditModule,
-    PersonModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
@@ -60,6 +51,11 @@ import { AuthInterceptorService } from './services/interceptor.service';
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    HomeModule,
+    EntityModule,
+    PersonModule,
+    CategoryModule,
+    ProductModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

@@ -1,13 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { EntityCreateEditComponent } from './entity-create-edit/entity-create-edit.component';
+import { EntityDetailComponent } from './entity-detail/entity-detail.component';
 import { EntityViewComponent } from './entity-view.component';
+import { EntityService } from './services/entity.service';
 
 
 
 @NgModule({
-  declarations: [EntityViewComponent],
+  declarations: [
+    EntityViewComponent,
+    EntityCreateEditComponent,
+    EntityDetailComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  providers:[
+    EntityService
   ]
 })
-export class EntityViewModule { }
+export class EntityModule { }
