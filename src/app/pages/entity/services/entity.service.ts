@@ -12,8 +12,10 @@ export class EntityService {
 
   constructor(private _http: HttpClient) {}
 
+  getEntityList(): Observable<any>{
+    return this._http.get(environment.annalsScienceUrl + '/entities');
+  }
   addEntity(entity: any): Observable<any> {
-    console.log(entity);
     this.parseCategoriesId(entity);
     this.parsePersonsId(entity);
     return this._http.post(environment.annalsScienceUrl + '/entities', entity);

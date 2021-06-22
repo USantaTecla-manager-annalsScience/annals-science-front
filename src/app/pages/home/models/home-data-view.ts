@@ -8,8 +8,8 @@ export const DATA_ENTITY: Entity[] = [{
     imageUrl: '',
     wikiUrl: '',
     description: 'Esto es una prueba de una entidad',
-    personsId: [],
-    categoriesId: []
+    persons: [],
+    categories: []
 }, {
     id: '2',
     name: 'Entidad2',
@@ -17,8 +17,8 @@ export const DATA_ENTITY: Entity[] = [{
     description: 'Esto es una prueba de una entidad',
     imageUrl: '',
     wikiUrl: '',
-    personsId: [],
-    categoriesId: []
+    persons: [],
+    categories: []
 }, {
     id: '3',
     name: 'Entidad3',
@@ -26,8 +26,8 @@ export const DATA_ENTITY: Entity[] = [{
     description: 'Esto es una prueba de una entidad',
     imageUrl: '',
     wikiUrl: '',
-    personsId: [],
-    categoriesId: []
+    persons: [],
+    categories: []
 }
 ];
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { categoryInputMap as CategoryInputMap, categoryOutpuMap as CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { CategoryInputMap as CategoryInputMap, CategoryOutpuMap as CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { CategoryService } from '../services/category.service';
 
 @Component({
