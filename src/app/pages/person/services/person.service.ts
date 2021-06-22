@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PersonInputMap } from 'src/app/models/interfaces/person.interface';
+import { Person, PersonInputMap } from 'src/app/models/interfaces/person.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class PersonService {
   }
 
   addPerson(person: any): Observable<any> {
-    const categories = person['categoriesId'];
+    const categories = [...person['categoriesId']];
     const parseCategories = categories.map(item => item.id);
     person['categoriesId'] = parseCategories;
 

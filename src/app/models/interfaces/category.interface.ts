@@ -14,4 +14,5 @@ export interface categoryOutpuMap{
     name: string;
     parent: string;
     children: any[]
+    isCat?: boolean;
 }

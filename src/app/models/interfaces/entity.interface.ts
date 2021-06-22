@@ -13,3 +13,14 @@ export interface Entity{
     personsId : Array<Person>;
     categoriesId: Array<Category>;
 }
+
+export interface EntityInputMap{
+    name: string;
+    creationDate?: string;
+    endDate?: string;
+    description?: string;
+    imageUrl?: string;
+    wikiUrl?: string;
+    personsId? : Array<Person>;
+    categoriesId?: Array<Category>;
+}

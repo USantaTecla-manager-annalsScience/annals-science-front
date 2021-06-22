@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import { EntityService } from '../services/entity.service';
 import { EntityCreateEditComponent } from './entity-create-edit.component';
 
 
@@ -27,7 +28,7 @@ import { EntityCreateEditComponent } from './entity-create-edit.component';
     ReactiveFormsModule,
     RouterModule
   ],
-  providers:[
+  providers:[EntityService
   ]
 })
 export class EntityCreateEditModule { }

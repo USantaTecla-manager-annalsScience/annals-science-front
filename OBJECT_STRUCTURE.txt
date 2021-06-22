@@ -1,0 +1,54 @@
+----------PERSON -----------
+
+[
+    {
+        "id": 6,
+        "name": "sergio",
+        "surname": "garcia",
+        "birthDate": null,
+        "deathDate": "nuncaa",
+        "description": "dees",
+        "imageUrl": "imageUrl...",
+        "wikiUrl": "wikiUrl...",
+        "categories": [
+            {
+                "id": 5,
+                "name": "casii5l5a9",
+                "parent": null,
+                "children": []
+            }
+        ]
+    }
+
+
+
+
+
+
+
+
+------------- PERSON INPUT -------
+
+{
+    "name": "sergio",
+    "surname": "garcia",
+    "birthDate": "10-07-1997",
+    "deathDate": "nuncaa",
+    "description": "dees",
+    "imageUrl": "imageUrl...",
+    "wikiUrl": "wikiUrl...",
+    "categoriesId": [5]
+}
+
+--------------- ENTITY -----------
+
+{
+    "name": "sergio",
+    "creationDate": "10-07-1997",
+    "endDate": "nuncaa",
+    "description": "dees",
+    "imageUrl": "imageUrl...",
+    "wikiUrl": "wikiUrl...",
+    "categoriesId": [12],
+    "personsId": [13]
+}

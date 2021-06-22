@@ -66,7 +66,6 @@ export class PersonCreateEditComponent implements OnInit {
 
   createPerson(){
     this.getInputForm();
-    console.log(this.personInput);
     this._personService.addPerson(this.personInput).subscribe(data =>{
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person created", duration: 3000 });
 
