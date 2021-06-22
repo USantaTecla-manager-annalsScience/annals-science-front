@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { TokenService } from './token.service';
 
 
 @Injectable({
@@ -11,12 +12,13 @@ import { catchError } from 'rxjs/operators';
 export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private _tokenService: TokenService
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token: string = sessionStorage.getItem('token');
+    const token: string = this._tokenService.get();
 
     let request = req;
 

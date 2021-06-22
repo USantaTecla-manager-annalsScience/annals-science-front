@@ -1,5 +1,5 @@
-import { Category } from "./category.interface";
-import { Person } from "./person.interface";
+import { Category, CategoryOutpuMap } from "./category.interface";
+import { Person, PersonOutputMap } from "./person.interface";
 import { Product } from "./product.interface";
 
 export interface Entity{
@@ -10,8 +10,8 @@ export interface Entity{
     description?: string;
     imageUrl: string;
     wikiUrl: string;
-    personsId : Array<Person>;
-    categoriesId: Array<Category>;
+    persons : Array<Person>;
+    categories: Array<Category>;
 }
 
 export interface EntityInputMap{
@@ -23,4 +23,17 @@ export interface EntityInputMap{
     wikiUrl?: string;
     personsId? : Array<number>;
     categoriesId?: Array<number>;
+}
+
+export interface EntityOutPutMap{
+    id: string;
+    name: string;
+    creationDate: string;
+    endDate: string;
+    description: string;
+    imageUrl: string;
+    wikiUrl: string;
+    persons : Array<PersonOutputMap>;
+    categories: Array<CategoryOutpuMap>;
+    isEntity?: boolean;
 }

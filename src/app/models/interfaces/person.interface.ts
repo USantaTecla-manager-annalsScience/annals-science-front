@@ -33,4 +33,5 @@ export interface PersonOutputMap{
     imageUrl?: string;
     wikiUrl?: string;
     categories?: Array<Category>;
+    isPerson?: boolean;
 }

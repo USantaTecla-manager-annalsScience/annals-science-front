@@ -4,6 +4,7 @@ import { ProductViewComponent } from './product-view.component';
 import { ProductCreateEditComponent } from './product-create-edit/product-create-edit.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
 
 
 
@@ -17,6 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  providers:[
+    ProductService
   ]
 })
 export class ProductModule { }

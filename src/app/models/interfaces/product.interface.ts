@@ -10,7 +10,19 @@ export interface Product{
     description?: string;
     imageUrl: string;
     wikiUrl: string;
-    entityList: Array<Entity>;
-    personList: Array<Person>;
-    categoryList: Array<Category>;
+    persons: Array<Person>;
+    categories: Array<Category>;
+    entities: Array<Entity>;
+}
+
+export interface ProductInputMap{
+    name: string;
+    creationDate?: string;
+    endDate?: string;
+    description?: string;
+    imageUrl?: string;
+    wikiUrl?: string;
+    personsId?: Array<number>;
+    categoriesId?: Array<number>;
+    entitiesId?: Array<number>;
 }

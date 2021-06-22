@@ -1,1 +1,109 @@
-<p>product-create-edit works!</p>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Crear Producto</h5>
+            <form [formGroup]="productForm">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Fecha de creación:</label>
+                            <input type="text" class="form-control" formControlName="creationDate" placeholder="">
+                        </div>
+                        <div class="col-6">
+                            <label>Fecha de finalización:</label>
+                            <input type="text" class="form-control" formControlName="endDate" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>imagen url:</label>
+                    <input type="text" class="form-control" formControlName="imageUrl"
+                        placeholder="Introduce la url de la imagen">
+                </div>
+                <div class="form-group">
+                    <label>wiki url:</label>
+                    <input type="text" class="form-control" formControlName="wikiUrl"
+                        placeholder="Introduce la url de la web relacionada">
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-6">
+                            <label>Categorias: </label>
+                            <div>
+                                <select multiple class="form-control" formControlName="categoriesId"
+                                    (ngModelChange)="getSelectedItem($event)">
+                                    <option *ngFor="let item of categoryList" [value]="item">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <label>Categorias Seleccionadas: </label>
+                            <div class="row selected-item-container">
+                                <p class="row-item" *ngFor="let item of selectedCategories">
+                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                                class="bi bi-trash"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-6">
+                            <label>Personas: </label>
+                            <div>
+                                <select multiple class="form-control" formControlName="personsId"
+                                    (ngModelChange)="getSelectedItem($event)">
+                                    <option *ngFor="let item of personList" [value]="item">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <label>Personas Seleccionadas: </label>
+                            <div class="row selected-item-container">
+                                <p class="row-item" *ngFor="let item of selectedPersons">
+                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                                class="bi bi-trash"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-6">
+                            <label>Entidades: </label>
+                            <div>
+                                <select multiple class="form-control" formControlName="personsId"
+                                    (ngModelChange)="getSelectedItem($event)">
+                                    <option *ngFor="let item of entityList" [value]="item">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <label>Entidades Seleccionadas: </label>
+                            <div class="row selected-item-container">
+                                <p class="row-item" *ngFor="let item of selectedEntities">
+                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                                class="bi bi-trash"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <textarea class="form-control" formControlName="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <button [disabled]="!productForm.valid" (click)= "onSubmit()" type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

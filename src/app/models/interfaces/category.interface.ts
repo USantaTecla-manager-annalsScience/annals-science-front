@@ -1,18 +1,18 @@
 export interface Category{
     id:number;
     name: string;
-    parentId?: number;
+    parent?: Category[];
 }
 
-export interface categoryInputMap{
+export interface CategoryInputMap{
     name: string;
     parentId?: number;
 }
 
-export interface categoryOutpuMap{
+export interface CategoryOutpuMap{
     id: number;
     name: string;
-    parent: string;
-    children: any[]
+    parent: Category;
+    children: Category[]
     isCat?: boolean;
 }
