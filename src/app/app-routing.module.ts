@@ -13,7 +13,7 @@ import { ProductCreateEditComponent } from "./pages/product/product-create-edit/
 const routes: Routes = [
     { path: 'home', component: HomeViewComponent },
     {path: 'cat', component: CategoryViewComponent},
-    {path: 'entity', component: CategoryViewComponent},
+    {path: 'entity', component: EntityViewComponent},
     {path:'create-entity', component: EntityCreateEditComponent},
     {path:'create-cat', component: CategoryCreateComponent},
     {path:'create-person', component: PersonCreateEditComponent},
