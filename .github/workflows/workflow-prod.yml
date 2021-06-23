@@ -30,9 +30,9 @@ jobs:
           push: true
           tags: tronxi/annals-science-front:prod
       - name: deploy
-        uses: garygrossgarten/github-action-ssh@release
+        uses: appleboy/ssh-action@master
         with:
-          command: cd /home/tronxi97/annals-science-docker-compose/scripts ; ./front_pull_restart.sh
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: $ {{ secrets.PASSWORD }}
+          script: cd /home/tronxi97/annals-science-docker-compose/scripts ; ./front_pull_restart.sh
