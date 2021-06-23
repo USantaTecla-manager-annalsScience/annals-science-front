@@ -1,6 +1,5 @@
 import { Category, CategoryOutpuMap } from "./category.interface";
-import { Person, PersonOutputMap } from "./person.interface";
-import { Product } from "./product.interface";
+import { Person } from "./person.interface";
 
 export interface Entity{
     id?: string;
@@ -33,7 +32,7 @@ export interface EntityOutPutMap{
     description: string;
     imageUrl: string;
     wikiUrl: string;
-    persons : Array<PersonOutputMap>;
+    persons : Array<Person>;
     categories: Array<CategoryOutpuMap>;
     isEntity?: boolean;
 }

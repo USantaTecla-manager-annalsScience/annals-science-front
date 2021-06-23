@@ -1,4 +1,3 @@
-import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryOutpuMap as CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
-import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { PersonService } from '../../person/services/person.service';
 import { EntityService } from '../services/entity.service';
@@ -30,7 +29,7 @@ export class EntityCreateEditComponent implements OnInit {
     categoriesId: []
   };
   categoryList: CategoryOutpuMap[] = [];
-  personList: PersonOutputMap[] = [];
+  personList: Person[] = [];
   entityList: EntityOutPutMap[] = [];
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();
@@ -124,7 +123,7 @@ export class EntityCreateEditComponent implements OnInit {
   }
 
 
-  setInitialForm() {
+  setInitialForm() { //hacerlo con el servicio de getById
     this._entityService.getEntityList().subscribe(res => {
       this.entityList = res;
       const entity: EntityOutPutMap = this.searchEntity();

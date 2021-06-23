@@ -21,28 +21,33 @@ export class DetailModalComponent implements OnInit {
     value:''
   }
   personId: number;
+  categories: string[] = [];
   constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
+    console.log('modal data',this.data);
     this.createObject();
     this.createNameObject();
-    this.wikiUrl = {title: 'Referencias:' , value: this.data.person[0].wikiUrl + (this.data.person[0].wikiUrl ?? '' )};
-    this.imgUrl = this.data.person[0].imgUrl;
-    this.personId = this.data.person[0].id;
+    this.wikiUrl = {title: 'Referencias:' , value: this.data.wikiUrl + (this.data.wikiUrl ?? '' )};
+    this.imgUrl = this.data.imgUrl;
+    this.personId = this.data.id;
+    Object.keys(this.data).forEach(key => {
+      if(key === 'categories'){ this.categories = this.data[key]; }
+    })
   }
 
   createObject() {
     this.personObject = [
-      { field: 'birthDate', title:'Fecha de creación:', value: (this.data.person[0].birthDate ?? '') },
-      { field: 'endDate', title: 'Fecha de muerte: ', value:  (this.data.person[0].deathDate ?? '')},
-      { field: 'description', title: 'Descripción: ' , value: this.data.person[0].description ?? ''}]
+      { field: 'birthDate', title:'Fecha de creación:', value: (this.data.birthDate ?? '') },
+      { field: 'deathDate', title: 'Fecha de muerte: ', value:  (this.data.deathDate ?? '')},
+      { field: 'description', title: 'Descripción: ' , value: this.data.description ?? ''}]
   }
 
   createNameObject(){
     this.nameObject = {
-      name : this.data.person[0].name ?? '' ,
-      surname: this.data.person[0].surname ?? ''  
+      name : this.data.name ?? '' ,
+      surname: this.data.surname ?? ''  
     };
   }
 
@@ -51,8 +56,7 @@ export class DetailModalComponent implements OnInit {
   }
 
   onClickEdit(){
-    this.router.navigate(['/person-edit', this.personId ]);
-    this.dialogRef.close();
+    this.dialogRef.close(this.personId);
   }
 
   checkLoggin(){
