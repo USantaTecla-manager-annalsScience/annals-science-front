@@ -28,4 +28,4 @@ jobs:
         with:
           build-args: ENVIRONMENT=prod
           push: true
-          tags: tronxi/annals-science-front:latest
+          tags: tronxi/annals-science-front:prod
