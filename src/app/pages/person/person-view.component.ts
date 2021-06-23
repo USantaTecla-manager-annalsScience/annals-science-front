@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
 import { TokenService } from 'src/app/services/token.service';
-import { DetailModalComponent } from './person-detail/detail-modal/detail-modal.component';
+import { DetailModalComponent } from '../../components/modals/detail-modal/detail-modal.component';
 import { PersonService } from './services/person.service';
 
 @Component({
