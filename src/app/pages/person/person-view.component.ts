@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
@@ -19,11 +20,12 @@ export class PersonViewComponent implements OnInit {
   selectedPersonId: any;
 
   constructor(private _personService: PersonService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
-    private modal: MatDialog
+    private modal: MatDialog, private router: Router
   ) { }
 
 
   ngOnInit(): void {
+    this._personService.clearCurrentEditPerson();
     this.getPersonList();
   }
 
@@ -47,21 +49,26 @@ export class PersonViewComponent implements OnInit {
     return this._tokenService.exist();
   }
 
-  openModal() {
+  async openModal() {
+    const currentPerson = await this.getSelectedPerson();
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
-      data: {
-        person: this.getSelectedPerson()
-      }
+      data: currentPerson
+      
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((personId) => {
+      if(personId){
+        this.router.navigate(['/person-edit', personId ]);
+        this._personService.setCurrentEditPerson(currentPerson);
+      }
+
       this.selectedPersonId = null;
     });
   }
 
-  getSelectedPerson(): any {
-    return this.personList.filter(item => item.id == this.selectedPersonId);
+  getSelectedPerson() { 
+    return this._personService.getPersonById(this.selectedPersonId).toPromise();
   }
 
   onDeletePerson(personId){

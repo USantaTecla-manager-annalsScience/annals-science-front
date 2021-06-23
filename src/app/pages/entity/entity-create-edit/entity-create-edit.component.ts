@@ -124,7 +124,7 @@ export class EntityCreateEditComponent implements OnInit {
   }
 
 
-  setInitialForm() {
+  setInitialForm() { //hacerlo con el servicio de getById
     this._entityService.getEntityList().subscribe(res => {
       this.entityList = res;
       const entity: EntityOutPutMap = this.searchEntity();
