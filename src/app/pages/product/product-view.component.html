@@ -8,7 +8,7 @@
                 <div class="col-6">
                     <div class="button-group">
                         <a [routerLink]="['/product-edit', selectedProductId]" ><button *ngIf="selectedProductId" class="btn btn-primary">Ver detalle</button></a>
-                        <button *ngIf="checkLoggin()" class="btn btn-primary">Crear</button>
+                        <a [routerLink]="'/product-create'"><button *ngIf="checkLoggin()" class="btn btn-primary">Crear</button></a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
@@ -36,14 +37,19 @@ export class ProductCreateEditComponent implements OnInit {
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();
   selectedEntities: Set<number> = new Set();
-
+  title = 'Crear Producto';
+  productId: any;
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _entityService: EntityService
-    , private _personService: PersonService, private _snackBar: MatSnackBar, private _productService: ProductService) { }
+    , private _personService: PersonService, private _snackBar: MatSnackBar, private _productService: ProductService,
+    private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.formBuilder();
     this.getInitialValues();
+    if(this.productId){
+      this.title = 'Modificar Producto'
+    }
   }
 
   formBuilder() {
@@ -70,8 +76,13 @@ export class ProductCreateEditComponent implements OnInit {
     this.getCategoryList();
     this.getEntityList();
     this.getPersonList();
+    this.getEntryId();
+  
   }
 
+  getEntryId() {
+    this.productId = this._route.snapshot.paramMap.get('id') ?? null;
+  }
   getProductInput(){
     Object.keys(this.productForm.controls).forEach(key =>{
       this.productInput[key] = this.productForm.get(key).value;
