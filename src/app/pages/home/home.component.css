@@ -23,8 +23,11 @@ a{
     color:black;
 }
 
+img {
+  max-height: 150px;
+}
+
 a:hover{
     color:cornflowerblue;
 }
 
-   
