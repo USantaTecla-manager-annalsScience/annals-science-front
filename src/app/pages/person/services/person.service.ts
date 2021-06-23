@@ -22,4 +22,8 @@ export class PersonService {
     return this._http.post(environment.annalsScienceUrl + '/persons', person);
   }
 
+  deletePersonById(id: any): Observable<any> {
+    return this._http.delete(environment.annalsScienceUrl + '/persons/'+id);
+  }
+
 }
