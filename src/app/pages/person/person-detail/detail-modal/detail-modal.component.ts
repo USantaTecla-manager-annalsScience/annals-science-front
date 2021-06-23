@@ -13,7 +13,8 @@ export class DetailModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.person = this.data.person;
+  
+    this.person = this.data.person[0];
   }
 
   close(){

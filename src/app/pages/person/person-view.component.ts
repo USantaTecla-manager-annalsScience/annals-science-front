@@ -45,18 +45,22 @@ export class PersonViewComponent implements OnInit {
     return this._tokenService.exist();
   }
 
-  openModal(){
+  openModal() {
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '300px',
       data: {
         person: this.getSelectedPerson()
       }
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.selectedPersonId = null;
+    });
   }
 
-  getSelectedPerson():any {
-    return this.personList.filter(item => item.id == this.selectedPersonId );
+  getSelectedPerson(): any {
+    return this.personList.filter(item => item.id == this.selectedPersonId);
   }
 
-  
+
 }
