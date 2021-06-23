@@ -34,5 +34,5 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          password: $ {{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
           script: cd /home/tronxi97/annals-science-docker-compose/scripts ; ./front_pull_restart.sh
