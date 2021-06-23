@@ -6,3 +6,7 @@ button{
     margin-bottom: 10px;
     margin-right: 5px;
 }
+
+option:hover{
+    background-color:#E5E5E5;
+}

@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
 import { TokenService } from 'src/app/services/token.service';
-import { DetailModalComponent } from './person-detail/detail-modal/detail-modal.component';
+import { DetailModalComponent } from '../../components/modals/detail-modal/detail-modal.component';
 import { PersonService } from './services/person.service';
 
 @Component({
@@ -14,31 +14,33 @@ import { PersonService } from './services/person.service';
 })
 export class PersonViewComponent implements OnInit {
 
+  messageError = 'An error occurs';
+  personList: PersonOutputMap[] = [];
+  selectedPersonId: any;
 
   constructor(private _personService: PersonService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
     private modal: MatDialog
   ) { }
 
-  personList: PersonOutputMap[] = [];
-  selectedPersonId: any;
-
-
 
   ngOnInit(): void {
-    this.getEntityList();
+    this.getPersonList();
   }
 
-  getEntityList() {
+  getPersonList() {
     this._personService.getPersonList().subscribe(res => {
       this.personList = res;
     }, err => {
-      console.log(err);
-      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+      console.log(err)
+        if (err.status === 401) {
+          this.messageError = "You don't have permission for this operation";
+        }
+        this._snackBar.openFromComponent(SnackbarComponent, { data: this.messageError, duration: 3000 });
     });
   }
 
   getSelectedItem(item) {
-    this.selectedPersonId = item[0];
+    this.selectedPersonId = item;
   }
 
   checkLoggin(): boolean {
@@ -47,7 +49,7 @@ export class PersonViewComponent implements OnInit {
 
   openModal() {
     const dialogRef = this.modal.open(DetailModalComponent, {
-      width: '500px',
+      width: '600px',
       data: {
         person: this.getSelectedPerson()
       }
@@ -60,6 +62,18 @@ export class PersonViewComponent implements OnInit {
 
   getSelectedPerson(): any {
     return this.personList.filter(item => item.id == this.selectedPersonId);
+  }
+
+  onDeletePerson(personId){
+    console.log(personId);
+    this._personService.deletePersonById(personId).subscribe(res =>{
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'Person deleted', duration: 3000 });
+      this.getPersonList();
+
+    },err => {
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+    });
   }
 
 
