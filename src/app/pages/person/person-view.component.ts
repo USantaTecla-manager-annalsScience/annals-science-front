@@ -25,10 +25,10 @@ export class PersonViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getEntityList();
+    this.getPersonList();
   }
 
-  getEntityList() {
+  getPersonList() {
     this._personService.getPersonList().subscribe(res => {
       this.personList = res;
     }, err => {
@@ -60,6 +60,18 @@ export class PersonViewComponent implements OnInit {
 
   getSelectedPerson(): any {
     return this.personList.filter(item => item.id == this.selectedPersonId);
+  }
+
+  onDeletePerson(personId){
+    console.log(personId);
+    this._personService.deletePersonById(personId).subscribe(res =>{
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'Person deleted', duration: 3000 });
+      this.getPersonList();
+
+    },err => {
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+    });
   }
 
 
