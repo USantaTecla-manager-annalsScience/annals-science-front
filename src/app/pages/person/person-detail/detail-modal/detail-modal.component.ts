@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -17,14 +18,16 @@ export class DetailModalComponent implements OnInit {
   name: string;
   imgUrl: string;
   wikiUrl: string;
+  personId: number;
   constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) { }
 
   ngOnInit(): void {
     this.createObject();
     console.log(this.personObject);
     this.name = this.data.person[0].name + (this.data.person[0].surname ?? '' ) ;
     this.imgUrl = this.data.person[0].imgUrl;
+    this.personId = this.data.person[0].id;
   }
 
   createObject() {
@@ -34,6 +37,11 @@ export class DetailModalComponent implements OnInit {
   }
 
   close() {
+    this.dialogRef.close();
+  }
+
+  onClickEdit(){
+    this.router.navigate(['/person-edit', this.personId ]);
     this.dialogRef.close();
   }
 
