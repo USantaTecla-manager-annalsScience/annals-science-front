@@ -14,14 +14,13 @@ import { PersonService } from './services/person.service';
 })
 export class PersonViewComponent implements OnInit {
 
+  messageError = 'An error occurs';
+  personList: PersonOutputMap[] = [];
+  selectedPersonId: any;
 
   constructor(private _personService: PersonService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
     private modal: MatDialog
   ) { }
-
-  personList: PersonOutputMap[] = [];
-  selectedPersonId: any;
-
 
 
   ngOnInit(): void {
@@ -32,13 +31,16 @@ export class PersonViewComponent implements OnInit {
     this._personService.getPersonList().subscribe(res => {
       this.personList = res;
     }, err => {
-      console.log(err);
-      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+      console.log(err)
+        if (err.status === 401) {
+          this.messageError = "You don't have permission for this operation";
+        }
+        this._snackBar.openFromComponent(SnackbarComponent, { data: this.messageError, duration: 3000 });
     });
   }
 
   getSelectedItem(item) {
-    this.selectedPersonId = item[0];
+    this.selectedPersonId = item;
   }
 
   checkLoggin(): boolean {
@@ -47,7 +49,7 @@ export class PersonViewComponent implements OnInit {
 
   openModal() {
     const dialogRef = this.modal.open(DetailModalComponent, {
-      width: '500px',
+      width: '600px',
       data: {
         person: this.getSelectedPerson()
       }

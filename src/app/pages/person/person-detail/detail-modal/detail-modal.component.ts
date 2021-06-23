@@ -9,31 +9,40 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DetailModalComponent implements OnInit {
 
-  personObject: any = [{
-    surname: '',
-    birthDate: '',
-    deathDate: '',
-    description: '',
-  }]
-  name: string;
+  personObject: any[] = [];
+  nameObject = {
+    name:'',
+    surname:''
+  } 
   imgUrl: string;
-  wikiUrl: string;
+  wikiUrl = {
+    title:'',
+    value:''
+  }
   personId: number;
   constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) { }
 
   ngOnInit(): void {
     this.createObject();
-    console.log(this.personObject);
-    this.name = this.data.person[0].name + (this.data.person[0].surname ?? '' ) ;
+    this.createNameObject();
+    this.wikiUrl = {title: 'Referencias:' , value: this.data.person[0].wikiUrl + (this.data.person[0].wikiUrl ?? '' )};
     this.imgUrl = this.data.person[0].imgUrl;
     this.personId = this.data.person[0].id;
   }
 
   createObject() {
     this.personObject = [
-      { field: 'date', value: (this.data.person[0].birthDate ?? '')+' - '+(this.data.person[0].deathDate ?? '') },
-      { field: 'description', value: this.data.person[0].description ?? ''}]
+      { field: 'birthDate', title:'Fecha de creación:', value: (this.data.person[0].birthDate ?? '') },
+      { field: 'endDate', title: 'Fecha de muerte: ', value:  (this.data.person[0].deathDate ?? '')},
+      { field: 'description', title: 'Descripción: ' , value: this.data.person[0].description ?? ''}]
+  }
+
+  createNameObject(){
+    this.nameObject = {
+      name : this.data.person[0].name ?? '' ,
+      surname: this.data.person[0].surname ?? ''  
+    };
   }
 
   close() {
