@@ -1,6 +1,7 @@
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-detail-modal',
@@ -21,7 +22,7 @@ export class DetailModalComponent implements OnInit {
   }
   personId: number;
   constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.createObject();
@@ -52,6 +53,10 @@ export class DetailModalComponent implements OnInit {
   onClickEdit(){
     this.router.navigate(['/person-edit', this.personId ]);
     this.dialogRef.close();
+  }
+
+  checkLoggin(){
+    return this._tokenService.exist();
   }
 
 }
