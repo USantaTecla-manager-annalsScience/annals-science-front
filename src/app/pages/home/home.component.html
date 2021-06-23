@@ -1,6 +1,8 @@
 <div class="container">
     <div class="row">
-        <div><h3>Entidades</h3></div>
+        <div class="row-header"><a [routerLink]="'/entity'">
+                <h3>Entidades</h3>
+            </a></div>
         <div class="home-content">
             <div class="card text-center" *ngFor="let item of _dataEntity">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -20,7 +22,9 @@
         </div>
     </div>
     <div class="row">
-        <div><h3>Productos</h3></div>
+        <div class="row-header"><a [routerLink]="'/product'">
+                <h3>Productos</h3>
+            </a></div>
         <div class="home-content">
             <div class="card text-center" *ngFor="let item of _dataEntity">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -40,7 +44,7 @@
         </div>
     </div>
     <div class="row">
-        <div><h3>Personas</h3></div>
+        <div class="row-header"><a [routerLink]="'/person'"><h3>Personas</h3></a></div>
         <div class="home-content">
             <div class="card text-center" *ngFor="let item of _dataEntity">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
