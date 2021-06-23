@@ -16,7 +16,7 @@ export class PersonService {
 
   addPerson(person: any): Observable<any> {
     const categories = [...person['categoriesId']];
-    const parseCategories = categories.map(item => item.id);
+    const parseCategories = categories.map(item => item?.id);
     person['categoriesId'] = parseCategories;
 
     return this._http.post(environment.annalsScienceUrl + '/persons', person);

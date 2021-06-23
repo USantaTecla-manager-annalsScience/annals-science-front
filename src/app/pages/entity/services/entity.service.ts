@@ -23,13 +23,13 @@ export class EntityService {
 
   parseCategoriesId(dataInput: any){
     const categories = [...dataInput['categoriesId']];
-    const parseCategories = categories.map(item => item.id);
+    const parseCategories = categories.map(item => item?.id);
     dataInput['categoriesId'] = parseCategories;
   }
 
   parsePersonsId(dataInput: any){
     const categories = [...dataInput['personsId']];
-    const parsePerson = categories.map(item => item.id);
+    const parsePerson = categories.map(item => item?.id);
     dataInput['personsId'] = parsePerson;
   }
 }

@@ -60,7 +60,7 @@ export class ModalRegisterComponent implements OnInit {
   }
 
   getInpuType(item: any) {
-    return item.type;
+    return item?.type;
   }
 
 

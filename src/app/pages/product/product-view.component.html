@@ -1,1 +1,25 @@
-<p>product-view works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="card-title">Lista de Productos</h5>
+                </div>
+                <div class="col-6">
+                    <div class="button-group">
+                        <a [routerLink]="['/product-edit', selectedProductId]" ><button *ngIf="selectedProductId" class="btn btn-primary">Ver detalle</button></a>
+                        <button *ngIf="checkLoggin()" class="btn btn-primary">Crear</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-12">
+                    <select multiple class="form-select" size="10" [ngModel]="selectedProductId" (ngModelChange)="getSelectedItem($event)">
+                        <option *ngFor="let item of productList" [value] = item?.id>{{item?.name}}</option>
+                    </select>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

@@ -49,7 +49,7 @@ export class CategoryViewComponent implements OnInit {
   }
 
   create() {
-    this._router.navigateByUrl('/create-cat');
+    this._router.navigateByUrl('/cat-create');
   }
 
 }

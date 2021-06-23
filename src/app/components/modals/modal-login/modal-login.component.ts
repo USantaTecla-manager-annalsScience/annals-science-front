@@ -46,7 +46,7 @@ export class ModalLoginComponent implements OnInit {
   }
 
   getInputTye(item: any){
-    return item.type;
+    return item?.type;
   }
 
   getButtonStatus(): boolean{

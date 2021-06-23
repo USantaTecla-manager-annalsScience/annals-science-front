@@ -2,7 +2,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Crear Entidad</h5>
+            <h5 class="card-title">{{title}}</h5>
             <form [formGroup]="entityForm">
                 <div class="form-group">
                     <label>Nombre:</label>
@@ -36,8 +36,8 @@
                             <label>Categorias: </label>
                             <div>
                                 <select multiple class="form-control" formControlName="categoriesId"
-                                    (ngModelChange)="getSelectedItem($event)">
-                                    <option *ngFor="let item of categoryList" [value]="item">{{item.name}}</option>
+                                    (ngModelChange)="getSelectedCategory($event)">
+                                    <option *ngFor="let item of categoryList" [value]="item">{{item?.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <label>Categorias Seleccionadas: </label>
                             <div class="row selected-item-container">
                                 <p class="row-item" *ngFor="let item of selectedCategories">
-                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                    {{item?.name}}<span><a (click)="onClickDelete(item,'categoryList')"><i
                                                 class="bi bi-trash"></i></a></span>
                                 </p>
                             </div>
@@ -58,8 +58,8 @@
                             <label>Personas: </label>
                             <div>
                                 <select multiple class="form-control" formControlName="personsId"
-                                    (ngModelChange)="getSelectedItem($event)">
-                                    <option *ngFor="let item of personList" [value]="item">{{item.name}}</option>
+                                    (ngModelChange)="getSelectedPerson($event)">
+                                    <option *ngFor="let item of personList" [value]="item">{{item?.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                             <label>Personas Seleccionadas: </label>
                             <div class="row selected-item-container">
                                 <p class="row-item" *ngFor="let item of selectedPersons">
-                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                    {{item?.name}}<span><a (click)="onClickDelete(item,'personList')"><i
                                                 class="bi bi-trash"></i></a></span>
                                 </p>
                             </div>

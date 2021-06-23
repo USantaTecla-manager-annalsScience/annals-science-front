@@ -50,7 +50,7 @@
                             <div>
                                 <select multiple class="form-control" formControlName="categoriesId"
                                     (ngModelChange)="getSelectedItem($event)">
-                                    <option *ngFor="let item of categoryData" [value]="item">{{item.name}}</option>
+                                    <option *ngFor="let item of categoryData" [value]="item">{{item?.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                             <label>Categorias Seleccionadas: </label>
                             <div class="row selected-item-container">
                                 <p class="selectedItem" *ngFor="let item of selectedItem">
-                                    {{item.name}}<span><a (click)="onClickDelete(item)"><i
+                                    {{item?.name}}<span><a (click)="onClickDelete(item)"><i
                                                 class="bi bi-trash"></i></a></span>
                                 </p>
                             </div>

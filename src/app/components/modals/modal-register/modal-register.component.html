@@ -5,8 +5,8 @@
             <mat-form-field >
                 <input matInput  [placeholder]="item?.value" [formControlName]="item?.field" [type]="getInpuType(item)" (input)="onPasswordInput()" required>
                 <mat-error *ngIf="item?.field === 'passwordRepeat'">Las contraseñas no coinciden</mat-error>
-                <mat-error *ngIf="modalForm.get('email').invalid && item.field === 'email'">{{getErrorEmailMessage()}}</mat-error>
-                <mat-error *ngIf="modalForm.invalid && item.field !== 'email'">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="modalForm.get('email').invalid && item?.field === 'email'">{{getErrorEmailMessage()}}</mat-error>
+                <mat-error *ngIf="modalForm.invalid && item?.field !== 'email'">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
         </div>
     </mat-dialog-content>

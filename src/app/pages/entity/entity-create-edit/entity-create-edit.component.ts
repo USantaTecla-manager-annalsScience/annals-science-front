@@ -1,8 +1,11 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryOutpuMap as CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
 import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { PersonService } from '../../person/services/person.service';
@@ -16,34 +19,41 @@ import { EntityService } from '../services/entity.service';
 export class EntityCreateEditComponent implements OnInit {
 
   entityForm: FormGroup;
-  entityInput : any = {
-    name:'',
+  entityInput: any = {
+    name: '',
     creationDate: '',
     endDate: '',
     description: '',
     imageUrl: '',
-    wikiUrl:'',
+    wikiUrl: '',
     personsId: [],
     categoriesId: []
   };
-  categoryList : CategoryOutpuMap[] = [];
-  personList : PersonOutputMap[] = [];
+  categoryList: CategoryOutpuMap[] = [];
+  personList: PersonOutputMap[] = [];
+  entityList: EntityOutPutMap[] = [];
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();
+  entityId: any;
+  title = 'Crear Entidad';
 
 
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _snackBar: MatSnackBar,
-    private _personService: PersonService, private _entityService: EntityService) {
+    private _personService: PersonService, private _entityService: EntityService, private _route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.formBuilder();
-    this.getCategoryList();
-    this.getPersonList();
+    this.getInitialData();
+    if (this.entityId) {
+      this.title = 'Modificar Entidad'
+      this.setInitialForm();
+
+    }
   }
 
-  formBuilder(){
+  formBuilder() {
     this.entityForm = this.fb.group({
       name: ['', Validators.required],
       creationDate: [''],
@@ -56,67 +66,120 @@ export class EntityCreateEditComponent implements OnInit {
     });
   }
 
-  getCategoryList(){
+  getEntryId() {
+    this.entityId = this._route.snapshot.paramMap.get('id') ?? null;
+  }
+
+  setInitialValues(entity: EntityOutPutMap) {
+    this.entityInput = {
+      name : entity.name,
+      creationDate: entity.creationDate,
+      endDate: entity.endDate,
+      description : entity.description,
+      imageUrl: entity.imageUrl,
+      wikiUrl: entity.wikiUrl,
+      personsId: this.getPersonsId(entity),
+      categoriesId: this.getCategoriesId(entity)
+    }
+    Object.keys(this.entityForm.controls).forEach(key => {
+      this.entityForm.get(key)?.setValue(this.entityInput[key] ?? '');
+    });
+  }
+
+  getPersonsId(entity: EntityOutPutMap): Array<number>{
+    const relatedPersonsId = entity.persons.map(item => item.id) ?? [];
+    relatedPersonsId.forEach(id => {
+      this.selectedPersons.add(id);
+    })
+    return relatedPersonsId
+  }
+
+  getCategoriesId(entity: any){
+
+    const relatedCategoriesId = entity.categories.map(item => item.id) ?? []; 
+    relatedCategoriesId.forEach(id => {
+      this.selectedCategories.add(id);
+    }) //gestionar que el array de categorias relacionadas esté vacio
+    return relatedCategoriesId
+  }
+
+  searchEntity(): EntityOutPutMap {
+    return this.entityList.find(item => item?.id == this.entityId) ?? null;
+  }
+
+  getInitialData() {
+    this.getCategoryList();
+    this.getPersonList();
+    this.getEntryId();
+  }
+
+  getCategoryList() {
     this._categoryService.getCategories().subscribe(res => {
-      const catField = {isCat: true};
       this.categoryList = res;
-      this.addControlField(this.categoryList, catField);
-    },err =>{
+    }, err => {
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
     })
   }
 
-  addControlField(list:any[], field:any){
-    list.forEach(item => {
-      Object.assign(item,field);
-    })
+
+  setInitialForm() {
+    this._entityService.getEntityList().subscribe(res => {
+      this.entityList = res;
+      const entity: EntityOutPutMap = this.searchEntity();
+      if (entity) {
+        this.setInitialValues(entity);
+      }
+    }, err => {
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+    });
   }
 
-  getPersonList(){
+
+  getPersonList() {
     this._personService.getPersonList().subscribe(res => {
-        this.personList = res;
-     },err =>{
+      this.personList = res;
+    }, err => {
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
     })
   }
-  
 
-  getSelectedItem(item: any){
-    if(item[0].isCat){
-      this.selectedCategories.add(item[0]);
-    }else{
-      this.selectedPersons.add(item[0]);
-    }
+
+  getSelectedCategory(item: any) {
+    this.selectedCategories.add(item[0]);
+
   }
 
-  onClickDelete(item){
-    if(item.isCat){
-      this.selectedCategories.delete(item);
-    }else{
-      this.selectedPersons.delete(item);
-    }
+  getSelectedPerson(item: any) {
+    this.selectedPersons.add(item[0]);
+
   }
 
-  onSubmit(){
+  onClickDelete(item: any, list: string) {
+    this[list].delete(item);
+  }
+
+
+  onSubmit() {
     this.getEntityInput();
     this.createEntity();
   }
 
-  createEntity(){
-    this._entityService.addEntity(this.entityInput).subscribe(res =>{
+  createEntity() {
+    this._entityService.addEntity(this.entityInput).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'Entity added', duration: 3000 });
-     },err =>{
+    }, err => {
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
     })
   }
 
-  getEntityInput(){
-    Object.keys(this.entityForm.controls).forEach(key =>{
+  getEntityInput() {
+    Object.keys(this.entityForm.controls).forEach(key => {
       this.entityInput[key] = this.entityForm.get(key).value;
     })
 

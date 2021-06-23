@@ -26,3 +26,16 @@ export interface ProductInputMap{
     categoriesId?: Array<number>;
     entitiesId?: Array<number>;
 }
+
+export interface ProductOutputMap{
+    id:number;
+    name: string;
+    creationDate?: string;
+    endDate?: string;
+    description?: string;
+    imageUrl?: string;
+    wikiUrl?: string;
+    categories?: Array<Category>;
+    persons?: Array<Person>;
+    entities?: Array<Entity>;
+}
