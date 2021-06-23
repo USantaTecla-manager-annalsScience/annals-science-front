@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="row-header"><a [routerLink]="'/entity'">
+                <h3>Entidades</h3>
+            </a></div>
+        <div class="home-content">
+            <div class="card text-center" *ngFor="let item of _dataEntity">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{item?.name}}</h5>
+                    <p class="card-text">
+                        {{item?.description}}
+                    </p>
+                    <a href="#!" class="btn btn-primary">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-header"><a [routerLink]="'/product'">
+                <h3>Productos</h3>
+            </a></div>
+        <div class="home-content">
+            <div class="card text-center" *ngFor="let item of _dataEntity">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{item?.name}}</h5>
+                    <p class="card-text">
+                        {{item?.description}}
+                    </p>
+                    <a href="#!" class="btn btn-primary">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-header"><a [routerLink]="'/person'"><h3>Personas</h3></a></div>
+        <div class="home-content">
+            <div class="card text-center" *ngFor="let item of _dataEntity">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                    <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{item?.name}}</h5>
+                    <p class="card-text">
+                        {{item?.description}}
+                    </p>
+                    <a href="#!" class="btn btn-primary">Leer más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

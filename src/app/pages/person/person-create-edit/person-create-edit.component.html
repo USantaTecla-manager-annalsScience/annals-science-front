@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Crear Persona</h5>
+            <form [formGroup]="personForm">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-6">
+                            <label>Nombre:</label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="">
+                        </div>
+                        <div class="col col-6">
+                            <label>Apellido:</label>
+                            <input type="text" class="form-control" formControlName="surname" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Fecha de creación:</label>
+                            <input type="text" class="form-control" formControlName="birthDate" placeholder="">
+                        </div>
+                        <div class="col-6">
+                            <label>Fecha de finalización:</label>
+                            <input type="text" class="form-control" formControlName="deathDate" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col col-6">
+                            <label>imagen url:</label>
+                            <input type="text" class="form-control" formControlName="imageUrl"
+                                placeholder="Introduce la url de la imagen">
+                        </div>
+                    </div>
+                    <div class="col col-6">
+                        <div class="form-group">
+                            <label>wiki url:</label>
+                            <input type="text" class="form-control" formControlName="wikiUrl"
+                                placeholder="Introduce la url de la web relacionada">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row select-row">
+                        <div class="col col-6">
+                            <label>Categorias: </label>
+                            <div>
+                                <select multiple class="form-control" formControlName="categoriesId"
+                                    (ngModelChange)="getSelectedItem($event)">
+                                    <option *ngFor="let item of categoryData" [value]="item">{{item?.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <label>Categorias Seleccionadas: </label>
+                            <div class="row selected-item-container">
+                                <p class="selectedItem" *ngFor="let item of selectedItem">
+                                    {{item?.name}}<span><a (click)="onClickDelete(item)"><i
+                                                class="bi bi-trash"></i></a></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <textarea class="form-control" formControlName="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <button [disabled]=!personForm.valid type="submit" class="btn btn-primary"
+                    (click)="onSubmit()">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

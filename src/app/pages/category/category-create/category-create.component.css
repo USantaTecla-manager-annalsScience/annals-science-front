@@ -1,0 +1,16 @@
+.card-title{
+    text-align: center;
+  }
+  
+  .card{
+      align-content: center;
+      margin:20px;
+  }
+
+  .container-header{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+button{
+  margin: 10px;
+}

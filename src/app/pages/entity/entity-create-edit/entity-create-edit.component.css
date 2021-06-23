@@ -1,0 +1,35 @@
+.card-title{
+  text-align: center;
+}
+
+.card{
+    align-content: center;
+    margin: 20px;
+}
+
+.container-header{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+button{
+  margin: 10px;
+}
+
+.selected-item-container{
+  overflow-y: auto;
+  max-height: 100px;
+  position: relative;
+  /* border: 1px solid #ced4da; */
+}
+
+p{
+  margin:0px;
+}
+
+i{
+  margin-left: 3px;
+}
+
+i:hover{
+  color: blue;
+}

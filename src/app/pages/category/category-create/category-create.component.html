@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Crear Categoria</h5>
+            <form [formGroup]="categoryForm">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Nombre:</label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="" required>
+                        </div>
+                        <div class="col-6">
+                            <label>Categorias:</label>
+                            <select class="form-control" formControlName="parentId">
+                                <option *ngFor="let item of categoryData" [value]="item?.id">{{item?.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="!categoryForm.valid" type="submit" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
