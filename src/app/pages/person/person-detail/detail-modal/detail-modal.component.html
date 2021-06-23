@@ -1,20 +1,20 @@
-
-
 <div class="container">
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div *ngIf="imgUrl" class="col-md-4">
+        <img src="{{imgUrl}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{name}}</h5>
+          <div *ngFor="let item of personObject">
+            <p class="card-text">{{item.value}}</p>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{person.name}}</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
+          <a  target="_blank" *ngIf="wikiUrl" href="{{wikiUrl}}"><span>{{wikiUrl}}</span></a>
+          <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
         </div>
       </div>
-    <button (click)="close()" class="btn btn-primary">Cerrar</button>
+    </div>
+  </div>
+  <button (click)="close()" class="btn btn-primary">Cerrar</button>
 </div>
-

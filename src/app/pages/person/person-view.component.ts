@@ -47,7 +47,7 @@ export class PersonViewComponent implements OnInit {
 
   openModal() {
     const dialogRef = this.modal.open(DetailModalComponent, {
-      width: '300px',
+      width: '500px',
       data: {
         person: this.getSelectedPerson()
       }

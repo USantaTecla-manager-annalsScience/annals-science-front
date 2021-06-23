@@ -8,16 +8,32 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DetailModalComponent implements OnInit {
 
-  person: any
+  personObject: any = [{
+    surname: '',
+    birthDate: '',
+    deathDate: '',
+    description: '',
+  }]
+  name: string;
+  imgUrl: string;
+  wikiUrl: string;
   constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-  
-    this.person = this.data.person[0];
+    this.createObject();
+    console.log(this.personObject);
+    this.name = this.data.person[0].name + (this.data.person[0].surname ?? '' ) ;
+    this.imgUrl = this.data.person[0].imgUrl;
   }
 
-  close(){
+  createObject() {
+    this.personObject = [
+      { field: 'date', value: (this.data.person[0].birthDate ?? '')+' - '+(this.data.person[0].deathDate ?? '') },
+      { field: 'description', value: this.data.person[0].description ?? ''}]
+  }
+
+  close() {
     this.dialogRef.close();
   }
 
