@@ -60,7 +60,6 @@ export class PersonViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe((personId) => {
       if(personId){
         this.router.navigate(['/person-edit', personId ]);
-        console.log('current person',currentPerson);
         this._personService.setPerson(currentPerson);
       }
 
@@ -73,7 +72,6 @@ export class PersonViewComponent implements OnInit {
   }
 
   onDeletePerson(personId){
-    console.log(personId);
     this._personService.deletePersonById(personId).subscribe(res =>{
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'Person deleted', duration: 3000 });
       this.getPersonList();

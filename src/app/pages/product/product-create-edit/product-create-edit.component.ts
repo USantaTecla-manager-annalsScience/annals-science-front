@@ -61,7 +61,6 @@ export class ProductCreateEditComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('aqui');
     this.getProductInput();
     this.createProduct();
   }

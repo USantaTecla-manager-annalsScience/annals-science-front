@@ -26,7 +26,6 @@ export class DetailModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
-    console.log('modal data',this.data);
     this.createObject();
     this.createNameObject();
     this.wikiUrl = {title: 'Referencias:' , value: this.data.wikiUrl + (this.data.wikiUrl ?? '' )};

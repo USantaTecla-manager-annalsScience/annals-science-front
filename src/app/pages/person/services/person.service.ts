@@ -34,7 +34,6 @@ export class PersonService {
   updatePerson(person: Person, id: number): Observable<any> {
 
     this.parseData(person);
-    console.log('person',person);
     person['deathDate']="hoy";
     return this._http.put(environment.annalsScienceUrl + '/persons/' + id, person);
   }
