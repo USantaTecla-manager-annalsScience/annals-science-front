@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
-import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { ProductInputMap } from 'src/app/models/interfaces/product.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { EntityService } from '../../entity/services/entity.service';
@@ -31,7 +31,7 @@ export class ProductCreateEditComponent implements OnInit {
     entitiesId: []
   }
   categoryList : CategoryOutpuMap[] = [];
-  personList : PersonOutputMap[] = [];
+  personList : Person[] = [];
   entityList: EntityOutPutMap[]=[];
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();

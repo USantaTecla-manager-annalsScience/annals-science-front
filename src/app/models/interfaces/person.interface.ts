@@ -1,7 +1,7 @@
 import { Category } from "./category.interface";
 
 export interface Person{
-    id?: string;
+    id?: number;
     name: string;
     surname?: string;
     birthDate?: string;
@@ -21,17 +21,4 @@ export interface PersonInputMap{
     imageUrl?: string;
     wikiUrl?: string;
     categoriesId?: Array<number>;
-}
-
-export interface PersonOutputMap{
-    id: number;
-    name: string;
-    surname?: string;
-    birthDate?: string;
-    deathDate?: string;
-    description?: string;
-    imageUrl?: string;
-    wikiUrl?: string;
-    categories?: Array<Category>;
-    isPerson?: boolean;
 }

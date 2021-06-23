@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Category, CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
-import { Person, PersonInputMap } from 'src/app/models/interfaces/person.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { PersonService } from '../services/person.service';
 
@@ -29,7 +29,7 @@ export class PersonCreateEditComponent implements OnInit {
     categoriesId: [],
   };
   person: Person = {
-    id:'',
+    id: null,
     name:'',
     surname: '',
     birthDate:'',
@@ -49,7 +49,6 @@ export class PersonCreateEditComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.selectedItem);
     this.formBuilder();
     this.getInitialData();
     if (this.personId) {
@@ -117,7 +116,6 @@ export class PersonCreateEditComponent implements OnInit {
 
   onSubmit() {
       this.getInputForm();
-      console.log(this.personInput);
       (this.personId) ? this.updatePerson() : this.createPerson();
   }
 
@@ -138,7 +136,12 @@ export class PersonCreateEditComponent implements OnInit {
   updatePerson(){
     this._personService.updatePerson(this.personInput,this.personId).subscribe(res => {
       console.log(res);
-    })
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "Person updated", duration: 3000 });
+    }, err => {
+     
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
+      console.log(err);
+    });
   }
 
   getInputForm() {

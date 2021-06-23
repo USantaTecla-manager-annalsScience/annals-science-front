@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { TokenService } from 'src/app/services/token.service';
 import { PersonService } from './services/person.service';
 
@@ -16,7 +16,7 @@ import { PersonService } from './services/person.service';
 export class PersonViewComponent implements OnInit {
 
   messageError = 'An error occurs';
-  personList: PersonOutputMap[] = [];
+  personList: Person[] = [];
   selectedPersonId: any;
 
   constructor(private _personService: PersonService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
@@ -25,7 +25,7 @@ export class PersonViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._personService.clearCurrentEditPerson();
+    this._personService.clearPerson();
     this.getPersonList();
   }
 
@@ -60,7 +60,8 @@ export class PersonViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe((personId) => {
       if(personId){
         this.router.navigate(['/person-edit', personId ]);
-        this._personService.setCurrentEditPerson(currentPerson);
+        console.log('current person',currentPerson);
+        this._personService.setPerson(currentPerson);
       }
 
       this.selectedPersonId = null;

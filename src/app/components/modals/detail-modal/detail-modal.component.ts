@@ -26,13 +26,15 @@ export class DetailModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
-    console.log(this.data);
+    console.log('modal data',this.data);
     this.createObject();
     this.createNameObject();
     this.wikiUrl = {title: 'Referencias:' , value: this.data.wikiUrl + (this.data.wikiUrl ?? '' )};
     this.imgUrl = this.data.imgUrl;
     this.personId = this.data.id;
-    this.categories = this.data.find(item => item === 'categories');
+    Object.keys(this.data).forEach(key => {
+      if(key === 'categories'){ this.categories = this.data[key]; }
+    })
   }
 
   createObject() {
@@ -54,7 +56,6 @@ export class DetailModalComponent implements OnInit {
   }
 
   onClickEdit(){
-    // this.router.navigate(['/person-edit', this.personId ]);
     this.dialogRef.close(this.personId);
   }
 

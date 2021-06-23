@@ -13,7 +13,7 @@
          <p *ngIf="wikiUrl?.value">{{wikiUrl.title}}<a target="_blank" href="{{wikiUrl}}"><span> {{wikiUrl?.value}}</span></a></p> 
           <div class="row">
             <div>Categorias relacionadas:</div>
-            <p *ngFor="let item of categories">{{item.name}}</p>
+            <p class="row-cat" *ngFor="let item of categories">{{item.name}}</p>
           </div>
         </div>
       </div>
