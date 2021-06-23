@@ -54,7 +54,6 @@ export class HomeViewComponent implements OnInit {
   }
 
   showDetailEntity(entity: Entity) {
-    console.log("entity", entity);
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
       data: {
@@ -64,7 +63,6 @@ export class HomeViewComponent implements OnInit {
   }
 
   showDetailPerson(person: Person) {
-    console.log("person", person);
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
       data: {
@@ -74,7 +72,6 @@ export class HomeViewComponent implements OnInit {
   }
 
   showDetailProduct(product: Product) {
-    console.log("product", product);
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
       data: {
