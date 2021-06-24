@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FilterComponent } from '../components/filter/filter.component';
 import { FooterComponent } from '../components/footer/footer.component';
@@ -18,7 +19,8 @@ import { SnackbarComponent } from '../components/snackbar/snackbar.component';
     SnackbarComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+   
   ],exports:[
     FilterComponent,
     FooterComponent,

@@ -12,6 +12,8 @@
 
 .row{
     margin-bottom: 5px;
+    padding: 10px;
+    display: flex;
 }
 
 .row-header{
@@ -29,5 +31,16 @@ img {
 
 a:hover{
     color:cornflowerblue;
+}
+
+.button-container-filter{
+    display: flex;
+    margin-right: 10px;
+    
+}
+
+.button-container{
+    display:flex;
+    padding: 10px;
 }
 
