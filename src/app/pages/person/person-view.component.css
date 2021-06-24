@@ -3,10 +3,25 @@
 }
 
 button{
-    margin-bottom: 10px;
     margin-right: 5px;
 }
 
 option:hover{
     background-color:#E5E5E5;
+}
+
+.button-container{
+    justify-content: flex-end;
+    flex-direction: row;
+    display: flex;
+    align-items: flex-end; 
+}
+
+.filter-container{
+    padding:10px;
+}
+
+
+.card-filter{
+    margin-bottom: 10px;
 }

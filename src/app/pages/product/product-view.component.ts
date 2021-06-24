@@ -114,7 +114,9 @@ export class ProductViewComponent implements OnInit {
 
   clean(){
     this.form.reset();
-    this.getCategoryList();
+    this.form.updateValueAndValidity();
+    this.getProductList();
+    this.selectedProductId = null;
   }
 
   getProductsBycat(catName: string){
@@ -122,6 +124,8 @@ export class ProductViewComponent implements OnInit {
       this.productList = res;
     })
   }
+
+  
 
 
 }

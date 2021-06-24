@@ -8,14 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilterComponent } from './components/filter/filter.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ModalLoginComponent } from './components/modals/modal-login/modal-login.component';
 import { ModalRegisterComponent } from './components/modals/modal-register/modal-register.component';
-import { ModalTemplateComponent } from './components/modals/modal-template/modal-template.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { CategoryModule } from './pages/category/category.module';
 import { EntityModule } from './pages/entity/entity.module';
@@ -23,23 +21,22 @@ import { HomeModule } from './pages/home/home.module';
 import { PersonModule } from './pages/person/person.module';
 import { ProductModule } from './pages/product/product.module';
 import { AuthInterceptorService } from './services/interceptor.service';
+import { SharedModule } from './shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ModalTemplateComponent,
     ModalRegisterComponent,
     ModalLoginComponent,
-    SnackbarComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -54,7 +51,8 @@ import { AuthInterceptorService } from './services/interceptor.service';
     EntityModule,
     PersonModule,
     CategoryModule,
-    ProductModule
+    ProductModule,
+    SharedModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
@@ -62,6 +60,7 @@ import { AuthInterceptorService } from './services/interceptor.service';
     multi: true
   }],
   entryComponents:[ModalRegisterComponent, SnackbarComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[FilterComponent]
 })
 export class AppModule { }
