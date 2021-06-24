@@ -12,7 +12,6 @@ export class CategoryService {
   constructor(private _http: HttpClient) { }
 
   addCategory(category: CategoryInputMap): Observable<any> {
-    console.log(category);
     return this._http.post(environment.annalsScienceUrl + '/categories', category);
   }
 

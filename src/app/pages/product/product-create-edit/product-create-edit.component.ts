@@ -4,9 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
-import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
-import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
-import { ProductInputMap } from 'src/app/models/interfaces/product.interface';
+import { Entity } from 'src/app/models/interfaces/entity.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { EntityService } from '../../entity/services/entity.service';
 import { PersonService } from '../../person/services/person.service';
@@ -32,8 +31,8 @@ export class ProductCreateEditComponent implements OnInit {
     entitiesId: []
   }
   categoryList : CategoryOutpuMap[] = [];
-  personList : PersonOutputMap[] = [];
-  entityList: EntityOutPutMap[]=[];
+  personList : Person[] = [];
+  entityList: Entity[]=[];
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();
   selectedEntities: Set<number> = new Set();
@@ -67,7 +66,6 @@ export class ProductCreateEditComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('aqui');
     this.getProductInput();
     this.createProduct();
   }

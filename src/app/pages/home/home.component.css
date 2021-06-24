@@ -14,8 +14,20 @@
     margin-bottom: 5px;
 }
 
-.h3{
-    margin: 3px;
+.row-header{
+    margin: 5px;
 }
 
-   
+a{
+    text-decoration: none;
+    color:black;
+}
+
+img {
+  max-height: 150px;
+}
+
+a:hover{
+    color:cornflowerblue;
+}
+

@@ -7,6 +7,7 @@ import { EntityCreateEditComponent } from "./pages/entity/entity-create-edit/ent
 import { EntityViewComponent } from "./pages/entity/entity-view.component";
 import { HomeViewComponent } from "./pages/home/home.component";
 import { PersonCreateEditComponent } from "./pages/person/person-create-edit/person-create-edit.component";
+import { PersonViewComponent } from "./pages/person/person-view.component";
 import { ProductCreateEditComponent } from "./pages/product/product-create-edit/product-create-edit.component";
 import { ProductViewComponent } from "./pages/product/product-view.component";
 
@@ -18,7 +19,9 @@ const routes: Routes = [
     { path: 'entity-edit/:id', component: EntityCreateEditComponent },
     { path: 'cat', component: CategoryViewComponent },
     { path: 'cat-create', component: CategoryCreateComponent },
-    { path: 'create-person', component: PersonCreateEditComponent },
+    { path: 'person', component: PersonViewComponent },
+    { path: 'person-create', component: PersonCreateEditComponent },
+    { path: 'person-edit/:id', component: PersonCreateEditComponent },
     { path: 'product', component: ProductViewComponent },
     { path: 'product-create', component: ProductCreateEditComponent },
     { path: 'product-edit/:id', component: ProductCreateEditComponent },
