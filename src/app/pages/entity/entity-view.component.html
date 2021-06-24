@@ -7,18 +7,20 @@
                 </div>
                 <div class="col-6">
                     <div class="button-group">
-                        <a [routerLink]="['/entity-edit', selectedEntityId]" ><button *ngIf="selectedEntityId" class="btn btn-primary">Ver detalle</button></a>
-                        <button [routerLink]="'/entity-create'" *ngIf="checkLoggin()" class="btn btn-primary">Crear</button>
+                        <button *ngIf="selectedEntityId" class="btn btn-primary" (click)="openModal()"><i class="bi bi-eye-fill"></i> Ver</button>
+                        <button [routerLink]="'/entity-create'" *ngIf="checkLoggin()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                             Crear</button>
+                        <button (click)="onDeleteEntity(selectedEntityId)" *ngIf="selectedEntityId && checkLoggin()" class="btn btn-primary"><i class="bi bi-trash-fill"></i> Eliminar</button>
                     </div>
                 </div>
             </div>
             <div class="row pt-3">
                 <div class="col-12">
-                    <select multiple class="form-select" size="10" [ngModel]="selectedEntityId" (ngModelChange)="getSelectedItem($event)">
-                        <option *ngFor="let item of entityList" [value] = item?.id>{{item?.name}}</option>
+                    <select  class="form-select" size="10" [ngModel]="selectedEntityId"
+                        (ngModelChange)="getSelectedItem($event)">
+                        <option *ngFor="let item of entityList" [value]=item?.id>{{item?.name}}</option>
                     </select>
                 </div>
-               
             </div>
         </div>
     </div>

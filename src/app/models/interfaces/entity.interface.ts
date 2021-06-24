@@ -7,10 +7,10 @@ export interface Entity{
     creationDate?: string;
     endDate?: string;
     description?: string;
-    imageUrl: string;
-    wikiUrl: string;
-    persons : Array<Person>;
-    categories: Array<Category>;
+    imageUrl?: string;
+    wikiUrl?: string;
+    persons? : Array<Person>;
+    categories?: Array<Category>;
 }
 
 export interface EntityInputMap{
@@ -22,17 +22,4 @@ export interface EntityInputMap{
     wikiUrl?: string;
     personsId? : Array<number>;
     categoriesId?: Array<number>;
-}
-
-export interface EntityOutPutMap{
-    id: string;
-    name: string;
-    creationDate: string;
-    endDate: string;
-    description: string;
-    imageUrl: string;
-    wikiUrl: string;
-    persons : Array<Person>;
-    categories: Array<CategoryOutpuMap>;
-    isEntity?: boolean;
 }
