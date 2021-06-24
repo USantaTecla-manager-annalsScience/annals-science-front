@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { Category, CategoryResponse } from 'src/app/models/interfaces/category.interface';
 import { TokenService } from 'src/app/services/token.service';
 import { CategoryService } from './services/category.service';
 
@@ -14,37 +14,57 @@ import { CategoryService } from './services/category.service';
 export class CategoryViewComponent implements OnInit {
 
   constructor(private _categoryService: CategoryService,
-              private _tokenService: TokenService,
-              private _snackBar: MatSnackBar,
-              private _router: Router) { }
+    private _tokenService: TokenService,
+    private _snackBar: MatSnackBar,
+    private _router: Router) { }
 
-  categoryData: CategoryOutpuMap [] = [];
-  selectedCategory: CategoryOutpuMap;
+  messageError = 'An error occurs';
+  categoryList: Category[] = [];
+  selectedCategoryId: any;
+  relatedCategories: any[];
+  selectedCategory: Category;
+  parentCategory: CategoryResponse;
+  childrenCategory: CategoryResponse[];
 
   ngOnInit(): void {
     this.getCategories();
   }
 
-  getCategories(){
+  getCategories() {
     this._categoryService.getCategories().subscribe(data => {
-      this.categoryData = data;
-    },err =>{
+      this.categoryList = data;
+    }, err => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
     })
   }
 
-  setSelectedCategory(category: CategoryOutpuMap) {
-    this.selectedCategory = category;
+  getSelectedItem(item: any) {
+    this.selectedCategoryId = item;
+    this.selectedCategory = this.categoryList.find(cat => cat.id == item);
+    this.getParentCategory();
+    this.getChildrenCategory();
   }
 
-  isLogged(): boolean {
+  getParentCategory() {
+    this.parentCategory = this.selectedCategory.parent ?? null;
+  }
+
+  getChildrenCategory() {
+    this.childrenCategory = (this.selectedCategory.children.length !== 0) ? this.selectedCategory.children : null;
+  }
+
+  checkLoggin(): boolean {
     return this._tokenService.exist();
   }
 
   delete(id: number) {
     this._categoryService.deleteCategory(id).subscribe(res => {
-      this.selectedCategory = null;
       this.getCategories();
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'Category deleted', duration: 3000 });
+    }, err => {
+      console.log(err);
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+
     })
   }
 

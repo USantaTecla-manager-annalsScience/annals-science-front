@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { Category, CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
 import { Person } from 'src/app/models/interfaces/person.interface';
 import { Product } from 'src/app/models/interfaces/product.interface';

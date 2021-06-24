@@ -1,7 +1,9 @@
 export interface Category{
     id:number;
     name: string;
-    parent?: Category[];
+    parent?: CategoryResponse;
+    children: CategoryResponse[];
+
 }
 
 export interface CategoryInputMap{
@@ -9,10 +11,8 @@ export interface CategoryInputMap{
     parentId?: number;
 }
 
-export interface CategoryOutpuMap{
+
+export interface CategoryResponse{
     id: number;
     name: string;
-    parent: Category;
-    children: Category[]
-    isCat?: boolean;
 }

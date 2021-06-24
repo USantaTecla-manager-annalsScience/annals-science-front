@@ -1,4 +1,4 @@
-import { Category, CategoryOutpuMap } from "./category.interface";
+import { Category } from "./category.interface";
 import { Person } from "./person.interface";
 
 export interface Entity{
