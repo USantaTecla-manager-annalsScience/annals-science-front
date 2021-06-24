@@ -12,15 +12,15 @@
                     </div>
                     <p *ngIf="wikiUrl?.value">{{wikiUrl.title}}<a [href]="wikiUrl.value" target="_blank"
                             (click)="onNavigate()">{{wikiUrl?.value}}</a></p>
-                    <div class="row">
+                    <div *ngIf="categories.length" class="row">
                         <div>Categorias relacionadas:</div>
                         <p class="row-cat" *ngFor="let item of categories">{{item.name}}</p>
                     </div>
-                    <div class="row">
+                    <div *ngIf="persons.length" class="row">
                         <div>Personas relacionadas:</div>
                         <p class="row-cat" *ngFor="let item of persons">{{item.name}}</p>
                     </div>
-                    <div class="row">
+                    <div *ngIf="entities.length" class="row">
                         <div>Entidades relacionadas:</div>
                         <p class="row-cat" *ngFor="let item of entities">{{item.name}}</p>
                     </div>

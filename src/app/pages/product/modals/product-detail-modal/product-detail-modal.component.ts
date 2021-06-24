@@ -31,6 +31,7 @@ export class ProductDetailModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.createObject();
     this.createNameObject();
     this.wikiUrl = { title: 'Referencias:', value: (this.data.wikiUrl ?? '') };
@@ -46,8 +47,8 @@ export class ProductDetailModalComponent implements OnInit {
 
   createObject() {
     this.productObject = [
-      { field: 'birthDate', title: 'Fecha de nacimiento:', value: (this.data.birthDate ?? '') },
-      { field: 'deathDate', title: 'Fecha de muerte: ', value: (this.data.deathDate ?? '') },
+      { field: 'creationDate', title: 'Fecha de creación:', value: (this.data.creationDate ?? '') },
+      { field: 'endDate', title: 'Fecha de finalización: ', value: (this.data.endDate ?? '') },
       { field: 'description', title: 'Descripción: ', value: this.data.description ?? '' }]
   }
 
