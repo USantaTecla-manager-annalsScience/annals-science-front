@@ -8,8 +8,10 @@ import { Person } from 'src/app/models/interfaces/person.interface';
 import { Product } from 'src/app/models/interfaces/product.interface';
 import { User } from 'src/app/models/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditDetailModalComponent } from '../entity/modals/edit-detail-modal/edit-detail-modal.component';
 import { EntityService } from '../entity/services/entity.service';
 import { PersonService } from '../person/services/person.service';
+import { ProductDetailModalComponent } from '../product/modals/product-detail-modal/product-detail-modal.component';
 import { ProductService } from '../product/services/product.service';
 import { DATA_ENTITY, HEADER_LOGIN, HEADER_REGISTER } from './models/home-data-view';
 
@@ -54,29 +56,23 @@ export class HomeViewComponent implements OnInit {
   }
 
   showDetailEntity(entity: Entity) {
-    const dialogRef = this.modal.open(DetailModalComponent, {
+    const dialogRef = this.modal.open(EditDetailModalComponent, {
       width: '600px',
-      data: {
-        person: entity
-      }
+      data: entity
     });
   }
 
   showDetailPerson(person: Person) {
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
-      data: {
-        person: person
-      }
+      data: person
     });
   }
 
   showDetailProduct(product: Product) {
-    const dialogRef = this.modal.open(DetailModalComponent, {
+    const dialogRef = this.modal.open(ProductDetailModalComponent, {
       width: '600px',
-      data: {
-        person: product
-      }
+      data: product
     });
   }
 
