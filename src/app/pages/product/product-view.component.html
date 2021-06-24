@@ -7,7 +7,7 @@
                         <div class="form-group">
                             <label>Filtro de categorias: </label>
                             <select class="form-control" formControlName="category">
-                                <option *ngFor="let item of categoryList" [value]="item">{{item?.name}}</option>
+                                <option *ngFor="let item of categoryList" [value]="item.name">{{item?.name}}</option>
                             </select>
                         </div>
                     </div>

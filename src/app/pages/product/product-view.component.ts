@@ -39,7 +39,7 @@ export class ProductViewComponent implements OnInit {
 
   formBuilder(){
     this.form = this.fb.group({
-      category: ['']
+      category: [null]
     })
   }
 
@@ -106,14 +106,21 @@ export class ProductViewComponent implements OnInit {
   }
 
   onSearch(){
-    const cat = this.form.get('category').value;
-    this._productService.getProductsByCategory(cat.name).subscribe( res => {
-      this.productList = res;
-    })
+    const cat = this.form.get('category').value ?? null ;
+    if(cat){
+      this.getProductsBycat(cat);
+    }
   }
 
   clean(){
     this.form.reset();
+    this.getCategoryList();
+  }
+
+  getProductsBycat(catName: string){
+    this._productService.getProductsByCategory(catName).subscribe( res => {
+      this.productList = res;
+    })
   }
 
 
