@@ -31,6 +31,13 @@ export class PersonService {
 
   }
 
+  
+  getPersonsByCategory(category: string): Observable<any>{
+    return this._http.get(environment.annalsScienceUrl + '/persons?category=' +category);
+
+  }
+
+
   updatePerson(person: Person, id: number): Observable<any> {
 
     this.parseData(person);

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
 import { TokenService } from 'src/app/services/token.service';
+import { CategoryService } from '../category/services/category.service';
 import { EditDetailModalComponent } from './modals/edit-detail-modal/edit-detail-modal.component';
 import { EntityService } from './services/entity.service';
 
@@ -15,16 +18,27 @@ import { EntityService } from './services/entity.service';
 })
 export class EntityViewComponent implements OnInit {
 
+  form : FormGroup = new FormGroup({});
   messageError = 'An error occurs';
   entityList: Entity [] = [];
   selectedEntityId: any;
+  categoryList: Category[];
 
   constructor(private _entityService: EntityService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
-    private modal: MatDialog, private router: Router) { }
+    private modal: MatDialog, private fb: FormBuilder, private router: Router, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this._entityService.clearEntity();
     this.getEntityList();
+    this.getCategoryList();
+    this.formBuilder();
+
+  }
+
+  formBuilder(){
+    this.form = this.fb.group({
+      category: [null]
+    })
   }
 
   getEntityList(){
@@ -37,6 +51,14 @@ export class EntityViewComponent implements OnInit {
       }
       this._snackBar.openFromComponent(SnackbarComponent, { data: this.messageError, duration: 3000 });
     });
+  }
+
+  getCategoryList() {
+    this._categoryService.getCategories().subscribe(data => {
+      this.categoryList = data;
+    }, err => {
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+    })
   }
   
   getSelectedItem(item){
@@ -79,6 +101,27 @@ export class EntityViewComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
     });
   }
+
+  onSearch(){
+    const cat = this.form.get('category').value ?? null ;
+    if(cat){
+      this.getEntityBycat(cat);
+    }
+  }
+
+  onClean(){
+    this.form.reset();
+    this.form.updateValueAndValidity();
+    this.getEntityList();
+    this.selectedEntityId = null;
+  }
+
+  getEntityBycat(catName: string){
+    this._entityService.getEntityByCategory(catName).subscribe( res => {
+      this.entityList = res;
+    })
+  }
+
 
 
 }
