@@ -5,13 +5,15 @@ import { ProductCreateEditComponent } from './product-create-edit/product-create
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
+import { ProductDetailModalComponent } from './modals/product-detail-modal/product-detail-modal.component';
 
 
 
 @NgModule({
   declarations: [
     ProductViewComponent,
-    ProductCreateEditComponent
+    ProductCreateEditComponent,
+    ProductDetailModalComponent
   ],
   imports: [
     CommonModule,

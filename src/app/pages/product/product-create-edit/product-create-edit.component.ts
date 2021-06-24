@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { Category, CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
 import { Person } from 'src/app/models/interfaces/person.interface';
+import { Product } from 'src/app/models/interfaces/product.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { EntityService } from '../../entity/services/entity.service';
 import { PersonService } from '../../person/services/person.service';
@@ -30,7 +31,20 @@ export class ProductCreateEditComponent implements OnInit {
     categoriesId: [],
     entitiesId: []
   }
-  categoryList : CategoryOutpuMap[] = [];
+
+  product: Product = {
+    name:'',
+    creationDate: '',
+    endDate: '',
+    description: '',
+    imageUrl: '',
+    wikiUrl:'',
+    persons: [],
+    categories: [],
+    entities: []
+  };
+
+  categoryList : Category[] = [];
   personList : Person[] = [];
   entityList: Entity[]=[];
   selectedCategories: Set<number> = new Set();
@@ -48,6 +62,7 @@ export class ProductCreateEditComponent implements OnInit {
     this.getInitialValues();
     if(this.productId){
       this.title = 'Modificar Producto'
+      this.getProductById();
     }
   }
 
@@ -67,7 +82,7 @@ export class ProductCreateEditComponent implements OnInit {
 
   onSubmit(){
     this.getProductInput();
-    this.createProduct();
+    (this.productId) ? this.updateProduct() : this.createProduct();
   }
 
   getInitialValues(){
@@ -81,6 +96,35 @@ export class ProductCreateEditComponent implements OnInit {
   getEntryId() {
     this.productId = this._route.snapshot.paramMap.get('id') ?? null;
   }
+
+  getProductById(){
+    this._productService.getProductById(this.productId).subscribe(res => {
+      this.product = res;
+      this.setInitialForm();
+    })
+  }
+
+  
+  setInitialForm() { 
+    Object.keys(this.productForm.controls).forEach(key => {
+      this.productForm.get(key).setValue(this.product[key] ?? '');
+    }); 
+    this.parseData(this.product,'categories','selectedCategories');
+    this.parseData(this.product,'persons','selectedPersons');
+    this.parseData(this.product,'entities','selectedEntities');
+
+    this.productForm.updateValueAndValidity();
+  }
+
+  parseData(object: any, field: string, list: string){
+    let set = new Set();
+    const array: any[] = object[field];
+    for(let item of array){
+      set.add(item);
+    }
+    this[list] = set;
+  }
+
   getProductInput(){
     Object.keys(this.productForm.controls).forEach(key =>{
       this.productInput[key] = this.productForm.get(key).value;
@@ -94,22 +138,16 @@ export class ProductCreateEditComponent implements OnInit {
   }
   getCategoryList(){
     this._categoryService.getCategories().subscribe( res => {
-      const catField = {isCat: true};
       this.categoryList = res;
-      this.addControlField(this.categoryList, catField);
-
     },err =>{
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
     })
   }
-
   getEntityList(){
     this._entityService.getEntityList().subscribe( res => {
-      const catEntity = {isEntity: true};
       this.entityList = res;
-      this.addControlField(this.entityList, catEntity);
     },err =>{
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
@@ -118,20 +156,13 @@ export class ProductCreateEditComponent implements OnInit {
 
   getPersonList(){
     this._personService.getPersonList().subscribe( res => {
-      const catPerson = {isPerson: true};
       this.personList = res;
-      this.addControlField(this.personList, catPerson);
     },err =>{
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
     })
   }
 
-  addControlField(list:any[], field:any){
-    list.forEach(item => {
-      Object.assign(item,field);
-    })
-  }
 
   createProduct(){
     this._productService.addProduct(this.productInput).subscribe(res =>{
@@ -141,6 +172,16 @@ export class ProductCreateEditComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
     })
+  }
+
+  updateProduct(){
+    this._productService.updateProduct(this.productInput,this.productId).subscribe(res => {
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "Product updated", duration: 3000 });
+    }, err => {
+     
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
+      console.log(err);
+    }); 
   }
 
   getSelectedCategory(item: any){
@@ -158,6 +199,8 @@ export class ProductCreateEditComponent implements OnInit {
   onClickDelete(item: any, list:string){
     this[list].delete(item);
   }
+
+  
 
 
 }

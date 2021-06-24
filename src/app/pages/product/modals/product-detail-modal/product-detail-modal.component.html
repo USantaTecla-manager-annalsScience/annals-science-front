@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div *ngIf="imgUrl" class="col-md-4">
+                <img src="{{imgUrl}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"> {{nameObject.name}} {{nameObject?.surname}}</h5>
+                    <div *ngFor="let item of productObject">
+                        <p *ngIf="item?.value" class="card-text">{{item?.title}} {{item?.value}}</p>
+                    </div>
+                    <p *ngIf="wikiUrl?.value">{{wikiUrl.title}}<a [href]="wikiUrl.value" target="_blank"
+                            (click)="onNavigate()">{{wikiUrl?.value}}</a></p>
+                    <div class="row">
+                        <div>Categorias relacionadas:</div>
+                        <p class="row-cat" *ngFor="let item of categories">{{item.name}}</p>
+                    </div>
+                    <div class="row">
+                        <div>Personas relacionadas:</div>
+                        <p class="row-cat" *ngFor="let item of persons">{{item.name}}</p>
+                    </div>
+                    <div class="row">
+                        <div>Entidades relacionadas:</div>
+                        <p class="row-cat" *ngFor="let item of entities">{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-group">
+        <button (click)="close()" class="btn btn-primary">Cerrar</button>
+        <button *ngIf="checkLoggin()" (click)="onClickEdit()" class="btn btn-primary "><i class="bi bi-pencil-fill"></i>
+            Editar</button>
+    </div>
+</div>
