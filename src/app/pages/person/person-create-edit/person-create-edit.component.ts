@@ -1,10 +1,9 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { Category, CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
+import { Category } from 'src/app/models/interfaces/category.interface';
 import { Person } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { PersonService } from '../services/person.service';
@@ -17,7 +16,7 @@ import { PersonService } from '../services/person.service';
 export class PersonCreateEditComponent implements OnInit {
 
   personForm: FormGroup;
-  categoryData: CategoryOutpuMap[] = [];
+  categoryData: Category[] = [];
   selectedItem = new Set();
   personInput: any = {
     name: '',
