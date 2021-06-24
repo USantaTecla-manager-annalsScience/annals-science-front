@@ -10,7 +10,7 @@
           <div *ngFor="let item of personObject">
             <p *ngIf="item?.value" class="card-text">{{item?.title}} {{item?.value}}</p>
           </div>
-         <p *ngIf="wikiUrl?.value">{{wikiUrl.title}}<a target="_blank" href="{{wikiUrl}}"><span> {{wikiUrl?.value}}</span></a></p> 
+         <p *ngIf="wikiUrl?.value">{{wikiUrl.title}}<a href="{{wikiUrl.value}}" target="_blank" > {{wikiUrl.value}}</a></p> 
           <div class="row">
             <div>Categorias relacionadas:</div>
             <p class="row-cat" *ngFor="let item of categories">{{item.name}}</p>

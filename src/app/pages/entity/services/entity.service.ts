@@ -10,9 +10,11 @@ import { environment } from 'src/environments/environment';
 })
 export class EntityService {
 
-  constructor(private _http: HttpClient) {}
+  currentEditEntity: Entity
 
-  getEntityList(): Observable<any>{
+  constructor(private _http: HttpClient) { }
+
+  getEntityList(): Observable<any> {
     return this._http.get(environment.annalsScienceUrl + '/entities');
   }
   addEntity(entity: any): Observable<any> {
@@ -21,15 +23,45 @@ export class EntityService {
     return this._http.post(environment.annalsScienceUrl + '/entities', entity);
   }
 
-  parseCategoriesId(dataInput: any){
+  getEntityById(id: number): Observable<any>{
+    return this._http.get(environment.annalsScienceUrl + '/entities/' + id);
+
+  }
+
+  
+  deleteEntityById(id: number): Observable<any> {
+    return this._http.delete(environment.annalsScienceUrl + '/entities/' + id);
+  }
+
+
+  updateEntity(entity: Entity, id: number): Observable<any> {
+
+    this.parseCategoriesId(entity);
+    this.parsePersonsId(entity);
+    return this._http.put(environment.annalsScienceUrl + '/entities/' + id, entity);
+  }
+
+  parseCategoriesId(dataInput: any) {
     const categories = [...dataInput['categoriesId']];
     const parseCategories = categories.map(item => item?.id);
     dataInput['categoriesId'] = parseCategories;
   }
 
-  parsePersonsId(dataInput: any){
-    const categories = [...dataInput['personsId']];
-    const parsePerson = categories.map(item => item?.id);
+  parsePersonsId(dataInput: any) {
+    const persons = [...dataInput['personsId']];
+    const parsePerson = persons.map(item => item?.id);
     dataInput['personsId'] = parsePerson;
+  }
+
+  getEntity(): Entity {
+    return { ... this.currentEditEntity };
+  }
+
+  setEntity(entity: Entity) {
+    this.currentEditEntity = entity;
+  }
+
+  clearEntity() {
+    this.currentEditEntity = undefined;
   }
 }

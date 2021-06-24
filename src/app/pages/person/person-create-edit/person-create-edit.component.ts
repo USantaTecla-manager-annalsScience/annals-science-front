@@ -1,7 +1,8 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Category, CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
 import { Person } from 'src/app/models/interfaces/person.interface';
@@ -44,7 +45,7 @@ export class PersonCreateEditComponent implements OnInit {
   title = 'Crear Persona';
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _personService: PersonService,
-    private _snackBar: MatSnackBar, private _route: ActivatedRoute) { }
+    private _snackBar: MatSnackBar, private _route: ActivatedRoute,  private router: Router) { }
 
 
 
@@ -123,6 +124,9 @@ export class PersonCreateEditComponent implements OnInit {
   createPerson(){
     this._personService.addPerson(this.personInput).subscribe(data => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person created", duration: 3000 });
+      this.router.navigate(['/person']);
+
+
 
     }, err => {
       if (err.status === 401) {
@@ -135,8 +139,10 @@ export class PersonCreateEditComponent implements OnInit {
 
   updatePerson(){
     this._personService.updatePerson(this.personInput,this.personId).subscribe(res => {
-      console.log(res);
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person updated", duration: 3000 });
+      setTimeout(()=>{
+        this.router.navigate(['/person']);
+      },3000);
     }, err => {
      
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });

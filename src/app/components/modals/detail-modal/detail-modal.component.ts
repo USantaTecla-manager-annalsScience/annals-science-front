@@ -28,7 +28,7 @@ export class DetailModalComponent implements OnInit {
   ngOnInit(): void {
     this.createObject();
     this.createNameObject();
-    this.wikiUrl = {title: 'Referencias:' , value: this.data.wikiUrl + (this.data.wikiUrl ?? '' )};
+    this.wikiUrl = {title: 'Referencias:' , value: this.data.wikiUrl ?? '' };
     this.imgUrl = this.data.imgUrl;
     this.personId = this.data.id;
     Object.keys(this.data).forEach(key => {
@@ -61,5 +61,7 @@ export class DetailModalComponent implements OnInit {
   checkLoggin(){
     return this._tokenService.exist();
   }
+
+  
 
 }
