@@ -39,6 +39,11 @@ export class ProductService {
     return this._http.put(environment.annalsScienceUrl + '/products/' + id, product);
   }
 
+  getProductsByCategory(category: string): Observable<any>{
+    return this._http.get(environment.annalsScienceUrl + '/products?category=' +category);
+
+  }
+
   paseDataInput(dataInput: any, field: string){
     const data = [...dataInput[field]];
     const parseData = data.map(item => item?.id);

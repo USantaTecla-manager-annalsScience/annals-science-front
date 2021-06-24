@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
+  @Input() isClean = true;
+
+  @Output() emitter = new EventEmitter();
+  
   constructor() { }
 
   ngOnInit(): void {

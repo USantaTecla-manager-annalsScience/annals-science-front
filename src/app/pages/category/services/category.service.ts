@@ -22,4 +22,5 @@ export class CategoryService {
   deleteCategory(id: number): Observable<any> {
     return this._http.delete(environment.annalsScienceUrl + '/categories/' + id);
   }
+
 }

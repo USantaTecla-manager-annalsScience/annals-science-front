@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { Category } from 'src/app/models/interfaces/category.interface';
 import { Product } from 'src/app/models/interfaces/product.interface';
 import { TokenService } from 'src/app/services/token.service';
+import { CategoryService } from '../category/services/category.service';
 import { ProductDetailModalComponent } from './modals/product-detail-modal/product-detail-modal.component';
 import { ProductService } from './services/product.service';
 
@@ -16,12 +19,13 @@ import { ProductService } from './services/product.service';
 export class ProductViewComponent implements OnInit {
 
   messageError = 'An error occurs';
-
+  form : FormGroup = new FormGroup({});
   productList: Product[] = [];
+  categoryList: Category[] = [];
   selectedProductId: any;
 
   constructor(private _productService: ProductService, private _snackBar: MatSnackBar, private _tokenService: TokenService,
-    private modal: MatDialog, private router: Router) { }
+    private modal: MatDialog, private router: Router, private fb: FormBuilder,   private _categoryService: CategoryService) { }
 
 
 
@@ -29,6 +33,14 @@ export class ProductViewComponent implements OnInit {
   ngOnInit(): void {
     this._productService.clearProduct();
     this.getProductList();
+    this.getCategoryList();
+    this.formBuilder();
+  }
+
+  formBuilder(){
+    this.form = this.fb.group({
+      category: ['']
+    })
   }
 
   getProductList() {
@@ -42,6 +54,15 @@ export class ProductViewComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: this.messageError, duration: 3000 });
     });
   }
+
+  getCategoryList() {
+    this._categoryService.getCategories().subscribe(data => {
+      this.categoryList = data;
+    }, err => {
+      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
+    })
+  }
+
 
   getSelectedItem(item) {
     this.selectedProductId = item;
@@ -82,6 +103,17 @@ export class ProductViewComponent implements OnInit {
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
     });
+  }
+
+  onSearch(){
+    const cat = this.form.get('category').value;
+    this._productService.getProductsByCategory(cat.name).subscribe( res => {
+      this.productList = res;
+    })
+  }
+
+  clean(){
+    this.form.reset();
   }
 
 
