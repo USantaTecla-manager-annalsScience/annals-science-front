@@ -29,7 +29,6 @@ import { AuthInterceptorService } from './services/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
-    FilterComponent,
     HeaderComponent,
     FooterComponent,
     ModalTemplateComponent,

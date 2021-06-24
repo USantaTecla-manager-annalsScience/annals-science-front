@@ -1,12 +1,11 @@
-import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
-import { CategoryOutpuMap as CategoryOutpuMap } from 'src/app/models/interfaces/category.interface';
-import { EntityOutPutMap } from 'src/app/models/interfaces/entity.interface';
-import { PersonOutputMap } from 'src/app/models/interfaces/person.interface';
+import { Category } from 'src/app/models/interfaces/category.interface';
+import { Entity } from 'src/app/models/interfaces/entity.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
 import { CategoryService } from '../../category/services/category.service';
 import { PersonService } from '../../person/services/person.service';
 import { EntityService } from '../services/entity.service';
@@ -29,9 +28,21 @@ export class EntityCreateEditComponent implements OnInit {
     personsId: [],
     categoriesId: []
   };
-  categoryList: CategoryOutpuMap[] = [];
-  personList: PersonOutputMap[] = [];
-  entityList: EntityOutPutMap[] = [];
+
+  entity: Entity = {
+    id:null,
+    name: '',
+    creationDate: '',
+    endDate: '',
+    description: '',
+    imageUrl: '',
+    wikiUrl: '',
+    persons: [],
+    categories: []
+  }
+  categoryList: Category[] = [];
+  personList: Person[] = [];
+  entityList: Entity[] = [];
   selectedCategories: Set<number> = new Set();
   selectedPersons: Set<number> = new Set();
   entityId: any;
@@ -48,7 +59,7 @@ export class EntityCreateEditComponent implements OnInit {
     this.getInitialData();
     if (this.entityId) {
       this.title = 'Modificar Entidad'
-      this.setInitialForm();
+      this.getEntityById();
 
     }
   }
@@ -66,46 +77,17 @@ export class EntityCreateEditComponent implements OnInit {
     });
   }
 
+  getEntityById(){
+    this._entityService.getEntityById(this.entityId).subscribe(res => {
+      this.entity = res;
+      this.setInitialForm();
+    })
+  }
+
   getEntryId() {
     this.entityId = this._route.snapshot.paramMap.get('id') ?? null;
   }
 
-  setInitialValues(entity: EntityOutPutMap) {
-    this.entityInput = {
-      name : entity.name,
-      creationDate: entity.creationDate,
-      endDate: entity.endDate,
-      description : entity.description,
-      imageUrl: entity.imageUrl,
-      wikiUrl: entity.wikiUrl,
-      personsId: this.getPersonsId(entity),
-      categoriesId: this.getCategoriesId(entity)
-    }
-    Object.keys(this.entityForm.controls).forEach(key => {
-      this.entityForm.get(key)?.setValue(this.entityInput[key] ?? '');
-    });
-  }
-
-  getPersonsId(entity: EntityOutPutMap): Array<number>{
-    const relatedPersonsId = entity.persons.map(item => item.id) ?? [];
-    relatedPersonsId.forEach(id => {
-      this.selectedPersons.add(id);
-    })
-    return relatedPersonsId
-  }
-
-  getCategoriesId(entity: any){
-
-    const relatedCategoriesId = entity.categories.map(item => item.id) ?? []; 
-    relatedCategoriesId.forEach(id => {
-      this.selectedCategories.add(id);
-    }) //gestionar que el array de categorias relacionadas esté vacio
-    return relatedCategoriesId
-  }
-
-  searchEntity(): EntityOutPutMap {
-    return this.entityList.find(item => item?.id == this.entityId) ?? null;
-  }
 
   getInitialData() {
     this.getCategoryList();
@@ -124,17 +106,23 @@ export class EntityCreateEditComponent implements OnInit {
   }
 
 
-  setInitialForm() {
-    this._entityService.getEntityList().subscribe(res => {
-      this.entityList = res;
-      const entity: EntityOutPutMap = this.searchEntity();
-      if (entity) {
-        this.setInitialValues(entity);
-      }
-    }, err => {
-      console.log(err);
-      this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
-    });
+  setInitialForm() { 
+    Object.keys(this.entityForm.controls).forEach(key => {
+      this.entityForm.get(key).setValue(this.entity[key] ?? '');
+    }); 
+    this.parseData(this.entity,'categories','selectedCategories');
+    this.parseData(this.entity,'persons','selectedPersons');
+
+    this.entityForm.updateValueAndValidity();
+  }
+
+  parseData(object: any, field: string, list: string){
+    let set = new Set();
+    const array: any[] = object[field];
+    for(let item of array){
+      set.add(item);
+    }
+    this[list] = set;
   }
 
 
@@ -159,13 +147,20 @@ export class EntityCreateEditComponent implements OnInit {
   }
 
   onClickDelete(item: any, list: string) {
-    this[list].delete(item);
+    (list === 'personList') ? this.deletePersonRelated(item) : this.deleteCategoryRelated(item);
   }
 
+  deletePersonRelated(item){
+    this.selectedPersons.delete(item);
+  }
+
+  deleteCategoryRelated(item){
+    this.selectedCategories.delete(item);
+  }
 
   onSubmit() {
     this.getEntityInput();
-    this.createEntity();
+    (this.entityId) ? this.updateEntity() : this.createEntity();
   }
 
   createEntity() {
@@ -178,9 +173,19 @@ export class EntityCreateEditComponent implements OnInit {
     })
   }
 
+  updateEntity(){
+    this._entityService.updateEntity(this.entityInput,this.entityId).subscribe(res => {
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "Entity updated", duration: 3000 });
+    }, err => {
+     
+      this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
+      console.log(err);
+    }); 
+  }
+
   getEntityInput() {
     Object.keys(this.entityForm.controls).forEach(key => {
-      this.entityInput[key] = this.entityForm.get(key).value;
+      this.entityInput[key] = this.entityForm.get(key)?.value;
     })
 
     this.entityInput['categoriesId'] = this.selectedCategories ? this.selectedCategories : '';

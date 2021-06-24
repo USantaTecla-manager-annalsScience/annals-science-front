@@ -6,3 +6,11 @@ button{
     margin-bottom: 10px;
     margin-right: 5px;
 }
+
+.card-filter{
+    margin-bottom: 10px;
+}
+
+.filter-container{
+    padding:10px;
+}
