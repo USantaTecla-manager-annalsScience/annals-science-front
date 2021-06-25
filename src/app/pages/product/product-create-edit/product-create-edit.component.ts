@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
@@ -55,7 +55,7 @@ export class ProductCreateEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _entityService: EntityService
     , private _personService: PersonService, private _snackBar: MatSnackBar, private _productService: ProductService,
-    private _route: ActivatedRoute) { }
+    private _route: ActivatedRoute, private _router: Router) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -167,7 +167,8 @@ export class ProductCreateEditComponent implements OnInit {
   createProduct(){
     this._productService.addProduct(this.productInput).subscribe(res =>{
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'Product added', duration: 3000 });
-     },err =>{
+      this.redirectProduct();
+    },err =>{
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
 
@@ -177,6 +178,7 @@ export class ProductCreateEditComponent implements OnInit {
   updateProduct(){
     this._productService.updateProduct(this.productInput,this.productId).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Product updated", duration: 3000 });
+      this.redirectProduct();
     }, err => {
      
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
@@ -198,6 +200,12 @@ export class ProductCreateEditComponent implements OnInit {
 
   onClickDelete(item: any, list:string){
     this[list].delete(item);
+  }
+
+  redirectProduct(){
+    setTimeout(()=>{
+      this._router.navigate(['/product']);
+    },3000);
   }
 
   

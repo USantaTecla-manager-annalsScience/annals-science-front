@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
@@ -51,7 +51,7 @@ export class EntityCreateEditComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _snackBar: MatSnackBar,
-    private _personService: PersonService, private _entityService: EntityService, private _route: ActivatedRoute) {
+    private _personService: PersonService, private _router: Router, private _entityService: EntityService, private _route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -166,6 +166,7 @@ export class EntityCreateEditComponent implements OnInit {
   createEntity() {
     this._entityService.addEntity(this.entityInput).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'Entity added', duration: 3000 });
+      this.redirectEntity();
     }, err => {
       console.log(err);
       this._snackBar.openFromComponent(SnackbarComponent, { data: 'An error occurs', duration: 3000 });
@@ -176,6 +177,7 @@ export class EntityCreateEditComponent implements OnInit {
   updateEntity(){
     this._entityService.updateEntity(this.entityInput,this.entityId).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Entity updated", duration: 3000 });
+      this.redirectEntity();
     }, err => {
      
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
@@ -191,6 +193,12 @@ export class EntityCreateEditComponent implements OnInit {
     this.entityInput['categoriesId'] = this.selectedCategories ? this.selectedCategories : '';
     this.entityInput['personsId'] = this.selectedPersons ? this.selectedPersons : '';
 
+  }
+
+  redirectEntity(){
+    setTimeout(()=>{
+      this._router.navigate(['/entity']);
+    },3000);
   }
 
 }

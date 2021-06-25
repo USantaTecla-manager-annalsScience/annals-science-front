@@ -44,7 +44,7 @@ export class PersonCreateEditComponent implements OnInit {
   title = 'Crear Persona';
 
   constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _personService: PersonService,
-    private _snackBar: MatSnackBar, private _route: ActivatedRoute,  private router: Router) { }
+    private _snackBar: MatSnackBar, private _route: ActivatedRoute,  private _router: Router) { }
 
 
 
@@ -123,9 +123,7 @@ export class PersonCreateEditComponent implements OnInit {
   createPerson(){
     this._personService.addPerson(this.personInput).subscribe(data => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person created", duration: 3000 });
-      this.router.navigate(['/person']);
-
-
+      this.redirectPerson();
 
     }, err => {
       if (err.status === 401) {
@@ -139,9 +137,7 @@ export class PersonCreateEditComponent implements OnInit {
   updatePerson(){
     this._personService.updatePerson(this.personInput,this.personId).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person updated", duration: 3000 });
-      setTimeout(()=>{
-        this.router.navigate(['/person']);
-      },3000);
+      this.redirectPerson();
     }, err => {
      
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
@@ -164,6 +160,13 @@ export class PersonCreateEditComponent implements OnInit {
 
   getSelectedItem(item: any) {
     this.selectedItem.add(item[0]);
+  }
+
+  redirectPerson(){
+      setTimeout(()=>{
+        this._router.navigate(['/person']);
+      },3000);
+  
   }
 
 }
