@@ -40,7 +40,7 @@ export class ProductDetailModalComponent implements OnInit {
     Object.keys(this.data).forEach(key => {
       (key === 'categories') ? (this.categories = this.data[key]) : null;
       (key === 'persons') ? (this.persons = this.data[key]) : null;
-      (key === 'entities') ? (this.persons = this.data[key]) : null;
+      (key === 'entities') ? (this.entities = this.data[key]) : null;
      }
     );
   }
