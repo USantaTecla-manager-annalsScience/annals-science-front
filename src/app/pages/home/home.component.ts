@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
 import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
@@ -31,7 +32,8 @@ export class HomeViewComponent implements OnInit {
     private _productService: ProductService,
     private _personService: PersonService,
     private modal: MatDialog, private fb: FormBuilder,
-    private _categoryService: CategoryService) { }
+    private _categoryService: CategoryService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.retrieveEntites();
@@ -76,6 +78,13 @@ export class HomeViewComponent implements OnInit {
     const dialogRef = this.modal.open(DetailModalComponent, {
       width: '600px',
       data: person
+    });
+
+    dialogRef.afterClosed().subscribe((personId) => {
+      if(personId){
+        this._router.navigate(['/person-edit', personId ]);
+        this._personService.setPerson(person);
+      }
     });
   }
 
