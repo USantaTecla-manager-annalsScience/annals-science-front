@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="col-6 button-container">
-                        <button (click)="onSearch()" class="btn btn-primary"><i class="bi bi-search"></i>
+                        <button (click)="onSearch()" class="btn btn-primary"><em class="bi bi-search"></em>
                             Buscar</button>
                         <button (click)="onClean()" class="btn btn-primary">
                             Limpiar</button>
@@ -30,10 +30,10 @@
                 </div>
                 <div class="col-6">
                     <div class="button-group">
-                        <button *ngIf="selectedEntityId" class="btn btn-primary" (click)="openModal()"><i class="bi bi-eye-fill"></i> Ver</button>
-                        <button [routerLink]="'/entity-create'" *ngIf="checkLoggin()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                        <button *ngIf="selectedEntityId" class="btn btn-primary" (click)="openModal()"><em class="bi bi-eye-fill"></em> Ver</button>
+                        <button [routerLink]="'/entity-create'" *ngIf="checkLoggin()" class="btn btn-primary"><em class="bi bi-plus-circle-fill"></em>
                              Crear</button>
-                        <button (click)="onDeleteEntity(selectedEntityId)" *ngIf="selectedEntityId && checkLoggin()" class="btn btn-primary"><i class="bi bi-trash-fill"></i> Eliminar</button>
+                        <button (click)="onDeleteEntity(selectedEntityId)" *ngIf="selectedEntityId && checkLoggin()" class="btn btn-primary"><em class="bi bi-trash-fill"></em> Eliminar</button>
                     </div>
                 </div>
             </div>

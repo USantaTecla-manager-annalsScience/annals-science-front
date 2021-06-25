@@ -8,7 +8,7 @@
                 <div class="card text-center" *ngFor="let item of entities">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                         <img [src]="item?.imageUrl || 'https://thumbs.dreamstime.com/z/icono-de-color-rgb-entidad-legal-contrato-alquiler-oficina-negocios-para-emprendedores-modernos-consulta-jur%C3%ADdica-la-firma-203691050.jpg'"
-                            class="img-fluid" />
+                            class="img-fluid" alt="error al cargar la imagen" />
                         <a href="#!">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                         </a>
@@ -52,7 +52,7 @@
                         <div class="card text-center" *ngFor="let item of persons">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                 <img [src]="item.imageUrl || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png'"
-                                    class="img-fluid" />
+                                    class="img-fluid" alt="error al cargar imagen"/>
                                 <a href="#!">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>
@@ -91,8 +91,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12 button-container">
-                        <button class="button-container-filter btn btn-primary" (click)="onSearch()"><i
-                                class="bi bi-search"></i>
+                        <button class="button-container-filter btn btn-primary" (click)="onSearch()"><em
+                                class="bi bi-search"></em>
                             Buscar</button>
                         <button class="button-container-filter btn btn-primary" (click)="clean()">
                             Limpiar</button>
