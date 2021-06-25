@@ -33,6 +33,11 @@ export class EntityService {
     return this._http.delete(environment.annalsScienceUrl + '/entities/' + id);
   }
 
+  getEntityByCategory(category: string): Observable<any>{
+    return this._http.get(environment.annalsScienceUrl + '/entities?category=' +category);
+
+  }
+
 
   updateEntity(entity: Entity, id: number): Observable<any> {
 

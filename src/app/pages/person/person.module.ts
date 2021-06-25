@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { PersonDetailModalComponent } from './modals/person-detail-modal/detail-modal.component';
 import { PersonCreateEditComponent } from './person-create-edit/person-create-edit.component';
 import { PersonViewComponent } from './person-view.component';
@@ -22,7 +23,8 @@ import { PersonService } from './services/person.service';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    SharedModule
   ],
   providers:[PersonService]
 })

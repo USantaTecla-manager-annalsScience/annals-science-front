@@ -3,7 +3,6 @@
 }
 
 button{
-    margin-bottom: 10px;
     margin-right: 5px;
 }
 
@@ -13,4 +12,11 @@ button{
 
 .filter-container{
     padding:10px;
+}
+
+.button-container{
+    justify-content: flex-end;
+    flex-direction: row; 
+    display: flex;
+    align-items: flex-end; 
 }

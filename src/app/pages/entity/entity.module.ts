@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { EntityCreateEditComponent } from './entity-create-edit/entity-create-edit.component';
 import { EntityDetailComponent } from './entity-detail/entity-detail.component';
 import { EntityViewComponent } from './entity-view.component';
@@ -21,7 +22,8 @@ import { EntityService } from './services/entity.service';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   providers:[
     EntityService
