@@ -109,7 +109,7 @@ export class PersonCreateEditComponent implements OnInit {
     for(let category of categories){
       cat.add(category);
     }
-    this.selectedItem = cat;  
+    this.selectedItem = cat;
     this.personForm.updateValueAndValidity();
 
   }
@@ -119,7 +119,7 @@ export class PersonCreateEditComponent implements OnInit {
       (this.personId) ? this.updatePerson() : this.createPerson();
   }
 
-  
+
   createPerson(){
     this._personService.addPerson(this.personInput).subscribe(data => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person created", duration: 3000 });
@@ -139,7 +139,7 @@ export class PersonCreateEditComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Person updated", duration: 3000 });
       this.redirectPerson();
     }, err => {
-     
+
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
       console.log(err);
     });
@@ -165,8 +165,8 @@ export class PersonCreateEditComponent implements OnInit {
   redirectPerson(){
       setTimeout(()=>{
         this._router.navigate(['/person']);
-      },3000);
-  
+      },1000);
+
   }
 
 }

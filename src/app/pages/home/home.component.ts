@@ -26,6 +26,7 @@ export class HomeViewComponent implements OnInit {
   products: Product[] = [];
   form: FormGroup = new FormGroup({});
   categoryList: Category [] = [];
+  selectedCategory: Category;
 
 
   constructor(private _entityService: EntityService,
@@ -45,7 +46,7 @@ export class HomeViewComponent implements OnInit {
 
   retrieveEntites() {
     this._entityService.getEntityList().subscribe(res => {
-      this.entities = res.slice(0, 3);
+      this.entities = res.slice(0, 4);
     })
   }
 
@@ -63,7 +64,7 @@ export class HomeViewComponent implements OnInit {
 
   retrieveProducts() {
     this._productService.getProductsList().subscribe(res => {
-      this.products = res.slice(0, 3);
+      this.products = res.slice(0, 4);
     })
 
   }
@@ -114,6 +115,7 @@ export class HomeViewComponent implements OnInit {
   onSearch() {
     const cat = this.form.get('category').value ?? null;
     if (cat) {
+      this.selectedCategory = this.categoryList.filter(value => value.name === cat)[0];
       this.getProductsBycat(cat);
       this.getEntityBycat(cat);
       this.getPersonBycat(cat);
@@ -156,6 +158,11 @@ export class HomeViewComponent implements OnInit {
     this._categoryService.getCategories().subscribe(data => {
       this.categoryList = data;
     })
+  }
+
+  setSelectedCategory(category: Category) {
+    this.form.get('category').setValue(category.name);
+    this.onSearch();
   }
 
 }
