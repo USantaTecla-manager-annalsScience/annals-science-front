@@ -65,6 +65,7 @@ export class HomeViewComponent implements OnInit {
     this._productService.getProductsList().subscribe(res => {
       this.products = res.slice(0, 3);
     })
+
   }
 
   showDetailEntity(entity: Entity) {
@@ -99,6 +100,13 @@ export class HomeViewComponent implements OnInit {
     const dialogRef = this.modal.open(ProductDetailModalComponent, {
       width: '600px',
       data: product
+    });
+
+    dialogRef.afterClosed().subscribe((productId) => {
+      if(productId){
+        this._router.navigate(['/product-edit', productId ]);
+        this._productService.setProduct(product);
+      }
     });
   }
 
