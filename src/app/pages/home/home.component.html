@@ -1,8 +1,9 @@
 <div class="container">
-    <div class="row">
-        <div class="col-10">
+    <div class="shadow p-3 m-5 bg-white rounded row">
+        <div class="col-8 col-card">
             <div class="row-header"><a [routerLink]="'/entity'">
-                    <h3>Entidades</h3> </a></div>
+                    <h3>Entidades</h3>
+                </a></div>
             <div class="home-content">
                 <div class="card text-center" *ngFor="let item of entities">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -38,7 +39,7 @@
                                 <p class="card-text">
                                     {{item?.description}}
                                 </p>
-                                <button (click)="showDetailPerson(item)" class="btn btn-primary">Leer más</button>
+                                <button (click)="showDetailProduct(item)" class="btn btn-primary">Leer más</button>
                             </div>
                         </div>
                     </div>
@@ -57,11 +58,11 @@
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">{{item?.name}}</h5>
+                                <h5 class="card-title">{{item?.name}} {{item?.surname}}</h5>
                                 <p class="card-text">
                                     {{item?.description}}
                                 </p>
-                                <button (click)="showDetailProduct(item)" class="btn btn-primary">Leer más</button>
+                                <button (click)="showDetailPerson(item)" class="btn btn-primary">Leer más</button>
                             </div>
                         </div>
                     </div>
@@ -69,29 +70,33 @@
             </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-4">
+            <div class="row-header">
+                <h3>Filtro de búsqueda</h3>
+            </div>
             <div class="card card-filter">
-                <form [formGroup]="form" class="form" form>
-                    <div class="row">
-                        <div class="col col-12">
+                <div class="row">
+                    <div class="col col-12">
+                        <form [formGroup]="form" class="form" form>
                             <div class="form-group">
                                 <label>Filtro de categorias: </label>
                                 <select class="form-control" formControlName="category">
-                                    <option selected></option>
+                                    <option value="-1" selected>"Selecciona una categoria</option>
                                     <option *ngFor="let item of categoryList" [value]="item.name">{{item?.name}}
                                     </option>
                                 </select>
                             </div>
-                        </div>
-
+                        </form>
                     </div>
-                </form>
-                <div class="col-6 button-container">
-                    <button class="button-container-filter btn btn-primary" (click)="onSearch()"><i
-                            class="bi bi-search"></i>
-                        Buscar</button>
-                    <button class="button-container-filter btn btn-primary" (click)="clean()">
-                        Limpiar</button>
+                </div>
+                <div class="row">
+                    <div class="col-12 button-container">
+                        <button class="button-container-filter btn btn-primary" (click)="onSearch()"><i
+                                class="bi bi-search"></i>
+                            Buscar</button>
+                        <button class="button-container-filter btn btn-primary" (click)="clean()">
+                            Limpiar</button>
+                    </div>
                 </div>
             </div>
 
