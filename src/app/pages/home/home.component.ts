@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/interfaces/category.interface';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
 import { Person } from 'src/app/models/interfaces/person.interface';
 import { Product } from 'src/app/models/interfaces/product.interface';
+import { PersonDetailModalComponent } from 'src/app/pages/person/modals/person-detail-modal/detail-modal.component';
 import { CategoryService } from '../category/services/category.service';
 import { EditDetailModalComponent } from '../entity/modals/edit-detail-modal/edit-detail-modal.component';
 import { EntityService } from '../entity/services/entity.service';
@@ -31,7 +32,8 @@ export class HomeViewComponent implements OnInit {
     private _productService: ProductService,
     private _personService: PersonService,
     private modal: MatDialog, private fb: FormBuilder,
-    private _categoryService: CategoryService) { }
+    private _categoryService: CategoryService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.retrieveEntites();
@@ -63,6 +65,7 @@ export class HomeViewComponent implements OnInit {
     this._productService.getProductsList().subscribe(res => {
       this.products = res.slice(0, 3);
     })
+
   }
 
   showDetailEntity(entity: Entity) {
@@ -70,12 +73,26 @@ export class HomeViewComponent implements OnInit {
       width: '600px',
       data: entity
     });
+
+    dialogRef.afterClosed().subscribe((entityId) => {
+      if(entityId){
+        this._router.navigate(['/entity-edit', entityId ]);
+        this._entityService.setEntity(entity);
+      }
+    });
   }
 
   showDetailPerson(person: Person) {
-    const dialogRef = this.modal.open(DetailModalComponent, {
+    const dialogRef = this.modal.open(PersonDetailModalComponent, {
       width: '600px',
       data: person
+    });
+
+    dialogRef.afterClosed().subscribe((personId) => {
+      if(personId){
+        this._router.navigate(['/person-edit', personId ]);
+        this._personService.setPerson(person);
+      }
     });
   }
 
@@ -83,6 +100,13 @@ export class HomeViewComponent implements OnInit {
     const dialogRef = this.modal.open(ProductDetailModalComponent, {
       width: '600px',
       data: product
+    });
+
+    dialogRef.afterClosed().subscribe((productId) => {
+      if(productId){
+        this._router.navigate(['/product-edit', productId ]);
+        this._productService.setProduct(product);
+      }
     });
   }
 

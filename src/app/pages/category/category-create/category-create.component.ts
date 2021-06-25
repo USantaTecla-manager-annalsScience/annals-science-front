@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { CategoryInputMap as CategoryInputMap, Category as Category } from 'src/app/models/interfaces/category.interface';
 import { CategoryService } from '../services/category.service';
@@ -19,7 +20,7 @@ export class CategoryCreateComponent implements OnInit {
   categoryInput: CategoryInputMap = {
     name: ''
   }
-  constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _snackBar: MatSnackBar) { }
+  constructor(private fb: FormBuilder, private _categoryService: CategoryService, private _snackBar: MatSnackBar, private _router: Router) { }
 
   ngOnInit(): void {
     this.formBuilder();
@@ -39,6 +40,7 @@ export class CategoryCreateComponent implements OnInit {
     this._categoryService.addCategory(this.categoryInput).subscribe(res => {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Category created", duration: 3000 });
       this.getCategories();
+      this.redirectCategory();
     },
       err => {
         console.log(err)
@@ -61,5 +63,11 @@ export class CategoryCreateComponent implements OnInit {
     this._categoryService.getCategories().subscribe(data => {
       this.categoryData = data;
     })
+  }
+
+  redirectCategory(){
+    setTimeout(()=>{
+      this._router.navigate(['/cat']);
+    },3000);
   }
 }

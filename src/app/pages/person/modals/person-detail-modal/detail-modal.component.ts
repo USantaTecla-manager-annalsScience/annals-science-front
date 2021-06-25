@@ -8,7 +8,7 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './detail-modal.component.html',
   styleUrls: ['./detail-modal.component.css']
 })
-export class DetailModalComponent implements OnInit {
+export class PersonDetailModalComponent implements OnInit {
 
   personObject: any[] = [];
   nameObject = {
@@ -22,7 +22,7 @@ export class DetailModalComponent implements OnInit {
   }
   personId: number;
   categories: string[] = [];
-  constructor(public dialogRef: MatDialogRef<DetailModalComponent>,
+  constructor(public dialogRef: MatDialogRef<PersonDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
