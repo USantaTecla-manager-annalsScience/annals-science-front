@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Category } from 'src/app/models/interfaces/category.interface';
-import { Entity, EntityInputMap } from 'src/app/models/interfaces/entity.interface';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Entity} from 'src/app/models/interfaces/entity.interface';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +27,7 @@ export class EntityService {
 
   }
 
-  
+
   deleteEntityById(id: number): Observable<any> {
     return this._http.delete(environment.annalsScienceUrl + '/entities/' + id);
   }

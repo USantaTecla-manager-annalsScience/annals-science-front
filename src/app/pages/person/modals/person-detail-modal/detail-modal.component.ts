@@ -1,7 +1,7 @@
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TokenService } from 'src/app/services/token.service';
+import {Router} from '@angular/router';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {TokenService} from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-detail-modal',
@@ -14,7 +14,7 @@ export class PersonDetailModalComponent implements OnInit {
   nameObject = {
     name:'',
     surname:''
-  } 
+  }
   imgUrl: string;
   wikiUrl = {
     title:'',
@@ -46,7 +46,7 @@ export class PersonDetailModalComponent implements OnInit {
   createNameObject(){
     this.nameObject = {
       name : this.data.name ?? '' ,
-      surname: this.data.surname ?? ''  
+      surname: this.data.surname ?? ''
     };
   }
 
@@ -61,7 +61,5 @@ export class PersonDetailModalComponent implements OnInit {
   checkLoggin(){
     return this._tokenService.exist();
   }
-
-  
 
 }

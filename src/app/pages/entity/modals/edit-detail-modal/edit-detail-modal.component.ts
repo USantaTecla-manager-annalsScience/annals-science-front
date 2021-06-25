@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { Category } from 'src/app/models/interfaces/category.interface';
-import { Person } from 'src/app/models/interfaces/person.interface';
-import { TokenService } from 'src/app/services/token.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {Category} from 'src/app/models/interfaces/category.interface';
+import {Person} from 'src/app/models/interfaces/person.interface';
+import {TokenService} from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-edit-detail-modal',

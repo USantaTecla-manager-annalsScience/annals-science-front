@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Person, PersonInputMap } from 'src/app/models/interfaces/person.interface';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Person} from 'src/app/models/interfaces/person.interface';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class PersonService {
 
   }
 
-  
+
   getPersonsByCategory(category: string): Observable<any>{
     return this._http.get(environment.annalsScienceUrl + '/persons?category=' +category);
 
