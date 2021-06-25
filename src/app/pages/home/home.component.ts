@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
+import { PersonDetailModalComponent } from 'src/app/pages/person/modals/person-detail-modal/detail-modal.component';
 import { ModalLoginComponent } from 'src/app/components/modals/modal-login/modal-login.component';
 import { ModalRegisterComponent } from 'src/app/components/modals/modal-register/modal-register.component';
 import { Entity } from 'src/app/models/interfaces/entity.interface';
@@ -63,7 +63,7 @@ export class HomeViewComponent implements OnInit {
   }
 
   showDetailPerson(person: Person) {
-    const dialogRef = this.modal.open(DetailModalComponent, {
+    const dialogRef = this.modal.open(PersonDetailModalComponent, {
       width: '600px',
       data: person
     });

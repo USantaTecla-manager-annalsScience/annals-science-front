@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { DetailModalComponent } from 'src/app/components/modals/detail-modal/detail-modal.component';
+import { PersonDetailModalComponent } from 'src/app/pages/person/modals/person-detail-modal/detail-modal.component';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Person } from 'src/app/models/interfaces/person.interface';
 import { TokenService } from 'src/app/services/token.service';
@@ -51,7 +51,7 @@ export class PersonViewComponent implements OnInit {
 
   async openModal() {
     const currentPerson = await this.getSelectedPerson();
-    const dialogRef = this.modal.open(DetailModalComponent, {
+    const dialogRef = this.modal.open(PersonDetailModalComponent, {
       width: '600px',
       data: currentPerson
       
