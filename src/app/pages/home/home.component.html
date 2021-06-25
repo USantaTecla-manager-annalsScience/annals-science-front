@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label>Filtro de categorias: </label>
                                 <select class="form-control" formControlName="category">
-                                    <option value="-1" selected>"Selecciona una categoria</option>
+                                    <option value="-1" selected>Selecciona una categoria</option>
                                     <option *ngFor="let item of categoryList" [value]="item.name">{{item?.name}}
                                     </option>
                                 </select>
@@ -89,6 +89,15 @@
                         </form>
                     </div>
                 </div>
+              <div class="row" *ngIf="selectedCategory">
+                <p *ngIf="selectedCategory.parent">
+                  Categoría base: <span class="children-category" (click)="setSelectedCategory(selectedCategory.parent)">{{selectedCategory.parent.name}} </span>
+                </p>
+                <p>Categorías derivadas:</p>
+                <p class="children-category" *ngFor="let children of selectedCategory.children" (click)="setSelectedCategory(children)">
+                  {{children.name}}
+                </p>
+              </div>
                 <div class="row">
                     <div class="col-12 button-container">
                         <button class="button-container-filter btn btn-primary" (click)="onSearch()"><em

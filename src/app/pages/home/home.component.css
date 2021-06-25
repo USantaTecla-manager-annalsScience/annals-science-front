@@ -33,10 +33,19 @@ a:hover{
     color:cornflowerblue;
 }
 
+.children-category:hover{
+  cursor: pointer;
+  color:cornflowerblue;
+}
+
+.children-category{
+  margin: 0;
+}
+
 .button-container-filter{
     display: flex;
     margin-right: 10px;
-    
+
 }
 
 .button-container{

@@ -24,11 +24,11 @@
         </div>
         <div class="col-6">
           <div class="row selected-item-container">
-            <h6 *ngIf="parentCategory">Categoria padre:</h6>
+            <h6 *ngIf="parentCategory">Categoria base:</h6>
             <p>{{parentCategory?.name}}</p>
           </div>
           <div>
-            <h6 *ngIf="childrenCategory">Categorias relacionadas:</h6>
+            <h6 *ngIf="childrenCategory">Categorias derivadas:</h6>
             <p class="row-item" *ngFor="let item of childrenCategory">
               {{item?.name}}
             </p>

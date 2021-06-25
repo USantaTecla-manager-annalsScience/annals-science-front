@@ -106,10 +106,10 @@ export class EntityCreateEditComponent implements OnInit {
   }
 
 
-  setInitialForm() { 
+  setInitialForm() {
     Object.keys(this.entityForm.controls).forEach(key => {
       this.entityForm.get(key).setValue(this.entity[key] ?? '');
-    }); 
+    });
     this.parseData(this.entity,'categories','selectedCategories');
     this.parseData(this.entity,'persons','selectedPersons');
 
@@ -179,10 +179,10 @@ export class EntityCreateEditComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Entity updated", duration: 3000 });
       this.redirectEntity();
     }, err => {
-     
+
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
       console.log(err);
-    }); 
+    });
   }
 
   getEntityInput() {
@@ -198,7 +198,7 @@ export class EntityCreateEditComponent implements OnInit {
   redirectEntity(){
     setTimeout(()=>{
       this._router.navigate(['/entity']);
-    },3000);
+    },1000);
   }
 
 }

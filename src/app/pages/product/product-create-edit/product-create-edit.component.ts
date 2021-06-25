@@ -90,7 +90,7 @@ export class ProductCreateEditComponent implements OnInit {
     this.getEntityList();
     this.getPersonList();
     this.getEntryId();
-  
+
   }
 
   getEntryId() {
@@ -104,11 +104,11 @@ export class ProductCreateEditComponent implements OnInit {
     })
   }
 
-  
-  setInitialForm() { 
+
+  setInitialForm() {
     Object.keys(this.productForm.controls).forEach(key => {
       this.productForm.get(key).setValue(this.product[key] ?? '');
-    }); 
+    });
     this.parseData(this.product,'categories','selectedCategories');
     this.parseData(this.product,'persons','selectedPersons');
     this.parseData(this.product,'entities','selectedEntities');
@@ -180,10 +180,10 @@ export class ProductCreateEditComponent implements OnInit {
       this._snackBar.openFromComponent(SnackbarComponent, { data: "Product updated", duration: 3000 });
       this.redirectProduct();
     }, err => {
-     
+
       this._snackBar.openFromComponent(SnackbarComponent, { data: "An error occurs", duration: 3000 });
       console.log(err);
-    }); 
+    });
   }
 
   getSelectedCategory(item: any){
@@ -205,10 +205,10 @@ export class ProductCreateEditComponent implements OnInit {
   redirectProduct(){
     setTimeout(()=>{
       this._router.navigate(['/product']);
-    },3000);
+    },1000);
   }
 
-  
+
 
 
 }
