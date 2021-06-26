@@ -26,7 +26,7 @@ export class ProductDetailModalComponent implements OnInit {
   productId: number;
   categories: Category[] = [];
   persons: Person[] = [];
-  entities: Entity [] = [];
+  entities: Entity[] = [];
   constructor(public dialogRef: MatDialogRef<ProductDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private _tokenService: TokenService) { }
 
@@ -38,10 +38,16 @@ export class ProductDetailModalComponent implements OnInit {
     this.imgUrl = this.data.imgUrl;
     this.productId = this.data.id;
     Object.keys(this.data).forEach(key => {
-      (key === 'categories') ? (this.categories = this.data[key]) : null;
-      (key === 'persons') ? (this.persons = this.data[key]) : null;
-      (key === 'entities') ? (this.entities = this.data[key]) : null;
-     }
+      if (key === 'categories') {
+        this.categories = this.data[key]
+      }
+      if (key === 'persons') {
+        this.persons = this.data[key]
+      }
+      if (key === 'entities') {
+        this.entities = this.data[key]
+      }
+    }
     );
   }
 
@@ -71,7 +77,7 @@ export class ProductDetailModalComponent implements OnInit {
     return this._tokenService.exist();
   }
 
-  onNavigate(){
+  onNavigate() {
 
   }
 
