@@ -1,10 +1,10 @@
 <div class="container">
     <div class="shadow p-3 m-5 bg-white rounded row">
-        <div class="col-8 col-card">
-            <div class="row-header"><a [routerLink]="'/entity'">
-                    <h3>Entidades</h3>
-                </a></div>
-            <div class="home-content">
+        <div class="col-12 col-md-8 col-card">
+            <div class="row">
+                <div class="row-header"><a [routerLink]="'/entity'">
+                        <h3>Entidades</h3>
+                    </a></div>
                 <div class="card text-center" *ngFor="let item of entities">
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                         <img [src]="item?.imageUrl || 'https://thumbs.dreamstime.com/z/icono-de-color-rgb-entidad-legal-contrato-alquiler-oficina-negocios-para-emprendedores-modernos-consulta-jur%C3%ADdica-la-firma-203691050.jpg'"
@@ -21,56 +21,51 @@
                         <button (click)="showDetailEntity(item)" class="btn btn-primary">Leer más</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row-header"><a [routerLink]="'/product'">
-                            <h3>Productos</h3>
-                        </a></div>
-                    <div class="home-content">
-                        <div class="card text-center" *ngFor="let item of products">
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                <img [src]="item.imageUrl || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png'"
-                                    class="img-fluid" alt="error al cargar imagen" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{item?.name}}</h5>
-                                <p class="card-text">
-                                    {{item?.description}}
-                                </p>
-                                <button (click)="showDetailProduct(item)" class="btn btn-primary">Leer más</button>
-                            </div>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="row-header"><a [routerLink]="'/product'">
+                        <h3>Productos</h3>
+                    </a></div>
+                <div class="card text-center" *ngFor="let item of products">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img [src]="item.imageUrl || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png'"
+                            class="img-fluid" alt="error al cargar imagen" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{item?.name}}</h5>
+                        <p class="card-text">
+                            {{item?.description}}
+                        </p>
+                        <button (click)="showDetailProduct(item)" class="btn btn-primary">Leer más</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row-header"><a [routerLink]="'/person'">
-                            <h3>Personas</h3>
-                        </a></div>
-                    <div class="home-content">
-                        <div class="card text-center" *ngFor="let item of persons">
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                <img [src]="item.imageUrl || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png'"
-                                    class="img-fluid" alt="error al cargar imagen"/>
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{item?.name}} {{item?.surname}}</h5>
-                                <p class="card-text">
-                                    {{item?.description}}
-                                </p>
-                                <button (click)="showDetailPerson(item)" class="btn btn-primary">Leer más</button>
-                            </div>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="row-header"><a [routerLink]="'/person'">
+                        <h3>Personas</h3>
+                    </a></div>
+                <div class="card text-center" *ngFor="let item of persons">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img [src]="item.imageUrl || 'https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png'"
+                            class="img-fluid" alt="error al cargar imagen" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{item?.name}} {{item?.surname}}</h5>
+                        <p class="card-text">
+                            {{item?.description}}
+                        </p>
+                        <button (click)="showDetailPerson(item)" class="btn btn-primary">Leer más</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="row-header">
                 <h3>Filtro de búsqueda</h3>
             </div>
@@ -89,23 +84,28 @@
                         </form>
                     </div>
                 </div>
-              <div class="row" *ngIf="selectedCategory">
-                <p *ngIf="selectedCategory.parent">
-                  Categoría base: <span class="children-category" (click)="setSelectedCategory(selectedCategory.parent)">{{selectedCategory.parent.name}} </span>
-                </p>
-                <p>Categorías derivadas:</p>
-                <p class="children-category" *ngFor="let children of selectedCategory.children" (click)="setSelectedCategory(children)">
-                  {{children.name}}
-                </p>
-              </div>
+                <div class="row" *ngIf="selectedCategory">
+                    <p *ngIf="selectedCategory.parent">
+                        Categoría base: <span class="children-category"
+                            (click)="setSelectedCategory(selectedCategory.parent)">{{selectedCategory.parent.name}}
+                        </span>
+                    </p>
+                    <p>Categorías derivadas:</p>
+                    <p class="children-category" *ngFor="let children of selectedCategory.children"
+                        (click)="setSelectedCategory(children)">
+                        {{children.name}}
+                    </p>
+                </div>
                 <div class="row">
-                    <div class="col-12 button-container">
-                        <button class="button-container-filter btn btn-primary" (click)="onSearch()"><em
-                                class="bi bi-search"></em>
-                            Buscar</button>
-                        <button class="button-container-filter btn btn-primary" (click)="clean()">
-                            Limpiar</button>
+                    <div class="button-container">
+                        <button class="button-filter btn btn-primary" (click)="onSearch()"><em
+                            class="bi bi-search"></em>
+                        Buscar</button>
+                    <button class="button-filter btn btn-primary" (click)="clean()">
+                        Limpiar</button>
                     </div>
+                        
+                  
                 </div>
             </div>
 
