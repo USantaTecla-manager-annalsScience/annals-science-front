@@ -1,7 +1,7 @@
 <div class="container">
     <div class="shadow p-3 m-5 bg-white rounded row">
         <div class="col-12 col-md-8 col-card">
-            <div class="row">
+            <div *ngIf="entities.length > 0" class="row">
                 <div class="row-header"><a [routerLink]="'/entity'">
                         <h3>Entidades</h3>
                     </a></div>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div  *ngIf="products.length > 0 " class="row">
                 <div class="row-header"><a [routerLink]="'/product'">
                         <h3>Productos</h3>
                     </a></div>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div  *ngIf="persons.length > 0 "   class="row">
                 <div class="row-header"><a [routerLink]="'/person'">
                         <h3>Personas</h3>
                     </a></div>
@@ -76,7 +76,6 @@
                             <div class="form-group">
                                 <label>Filtro de categorias: </label>
                                 <select class="form-control" formControlName="category">
-                                    <option value="-1" selected>Selecciona una categoria</option>
                                     <option *ngFor="let item of categoryList" [value]="item.name">{{item?.name}}
                                     </option>
                                 </select>
@@ -90,7 +89,7 @@
                             (click)="setSelectedCategory(selectedCategory.parent)">{{selectedCategory.parent.name}}
                         </span>
                     </p>
-                    <p>Categorías derivadas:</p>
+                    <p *ngIf="selectedCategory.children.length > 0">Categorías derivadas:</p>
                     <p class="children-category" *ngFor="let children of selectedCategory.children"
                         (click)="setSelectedCategory(children)">
                         {{children.name}}

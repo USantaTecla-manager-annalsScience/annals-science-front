@@ -127,6 +127,7 @@ export class HomeViewComponent implements OnInit {
     this.form.reset();
     this.resetSearch();
     this.form.updateValueAndValidity();
+    this.selectedCategory = null;
 
   }
 
