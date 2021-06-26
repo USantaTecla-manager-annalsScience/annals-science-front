@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Router} from '@angular/router';
-import {Category} from 'src/app/models/interfaces/category.interface';
-import {Person} from 'src/app/models/interfaces/person.interface';
-import {TokenService} from 'src/app/services/token.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/models/interfaces/category.interface';
+import { Person } from 'src/app/models/interfaces/person.interface';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-edit-detail-modal',
@@ -35,9 +35,13 @@ export class EditDetailModalComponent implements OnInit {
     this.imgUrl = this.data.imgUrl;
     this.entityId = this.data.id;
     Object.keys(this.data).forEach(key => {
-      (key === 'categories') ? (this.categories = this.data[key]) : null;
-      (key === 'persons') ? (this.persons = this.data[key]) : null;
-     }
+      if (key === 'categories') {
+        this.categories = this.data[key];
+      }
+      if (key === 'persons') {
+        this.persons = this.data[key]
+      }
+    }
     );
   }
 
@@ -67,7 +71,7 @@ export class EditDetailModalComponent implements OnInit {
     return this._tokenService.exist();
   }
 
-  onNavigate(){
+  onNavigate() {
 
   }
 
