@@ -20,3 +20,8 @@ button{
     display: flex;
     align-items: flex-end; 
 }
+
+.container{
+    height: 100%;
+    position: relative;
+}

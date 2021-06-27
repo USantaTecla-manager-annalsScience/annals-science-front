@@ -30,3 +30,13 @@ a{
         display: none;
     }
 }
+
+.router-container{
+    height: 100%;
+}
+
+.item-container{
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
