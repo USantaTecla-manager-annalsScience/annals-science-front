@@ -42,16 +42,15 @@ a:hover{
   margin: 0;
 }
 
-.button-container-filter{
-    display: flex;
-    margin-right: 10px;
+.button-filter{
+    margin:6px;
 
 }
 
-.button-container{
-    display:flex;
-    padding: 10px;
+.card-filter{
+    width: 100%;
 }
+
 
 
 
