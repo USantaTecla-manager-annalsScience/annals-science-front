@@ -17,6 +17,13 @@ button{
   width: 15%;
 }
 
+
+@media (max-width: 576px) { 
+  button{
+    width: 30%;
+  }
+}
+
 .container{
   height: 100%;
   display: flex;
