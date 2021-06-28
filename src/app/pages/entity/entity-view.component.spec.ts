@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EntityViewComponent } from './entity-view.component';
+import { EntityModule } from './entity.module';
 
 describe('EntityViewComponent', () => {
   let component: EntityViewComponent;
@@ -8,7 +10,9 @@ describe('EntityViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EntityViewComponent ]
+      declarations: [  ],
+      imports: [EntityModule,
+      RouterTestingModule]
     })
     .compileComponents();
   });

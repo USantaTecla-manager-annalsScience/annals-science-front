@@ -6,3 +6,45 @@ header{
 a{
     color: black;
 }
+
+.row-header{
+    width: 80%;
+}
+
+.item-list{
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group{
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 576px) { 
+    .img-logo{
+        display: none;
+    }
+}
+
+.router-container{
+    height: 100%;
+}
+
+.item-container{
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
+
+.nav-item :active{
+    background-color: #0d6efd;
+}
+
+.nav{
+    justify-content: center;
+}

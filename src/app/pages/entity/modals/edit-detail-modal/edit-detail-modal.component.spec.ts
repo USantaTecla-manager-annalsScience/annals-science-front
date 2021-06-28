@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 import { EditDetailModalComponent } from './edit-detail-modal.component';
 
@@ -8,7 +9,12 @@ describe('EditDetailModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditDetailModalComponent ]
+      declarations: [ EditDetailModalComponent ],
+      imports: [
+        MatDialog,
+        MatDialogRef,
+        MatDialogModule
+      ]
     })
     .compileComponents();
   });

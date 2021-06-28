@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { PersonViewComponent } from './person-view.component';
+import { PersonModule } from './person.module';
 
 describe('PersonViewComponent', () => {
   let component: PersonViewComponent;
@@ -8,7 +10,11 @@ describe('PersonViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PersonViewComponent ]
+      declarations: [ ],
+      imports:[
+        PersonModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   });

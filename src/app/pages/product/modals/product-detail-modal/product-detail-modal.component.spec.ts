@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { ProductDetailModalComponent } from './product-detail-modal.component';
 
-describe('ProductDetailModalComponent', () => {
+fdescribe('ProductDetailModalComponent', () => {
   let component: ProductDetailModalComponent;
   let fixture: ComponentFixture<ProductDetailModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductDetailModalComponent ]
+      declarations: [ ProductDetailModalComponent ],
+      imports:[
+        MatDialog,
+        MatDialogRef,
+        MatDialogModule
+      ]
     })
     .compileComponents();
   });

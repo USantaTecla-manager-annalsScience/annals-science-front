@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PersonModule } from '../person.module';
 
 import { PersonCreateEditComponent } from './person-create-edit.component';
 
@@ -8,7 +9,8 @@ describe('PersonCreateEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PersonCreateEditComponent ]
+      declarations: [  ],
+      imports: [PersonModule]
     })
     .compileComponents();
   });

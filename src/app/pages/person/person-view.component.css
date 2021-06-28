@@ -24,4 +24,20 @@ option:hover{
 
 .card-filter{
     margin-bottom: 10px;
+    width: 100%;
+    
 }
+
+.container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    width: 100%;
+}
+  
+
