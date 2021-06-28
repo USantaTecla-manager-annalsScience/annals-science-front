@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CategoryService } from './services/category.service';
 import { CategoryViewComponent } from './category-view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -15,9 +17,12 @@ import { CategoryViewComponent } from './category-view.component';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    MatSnackBarModule
+    
   ],
   providers: [
     CategoryService

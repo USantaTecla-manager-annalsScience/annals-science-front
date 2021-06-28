@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EntityModule } from '../entity.module';
 
 import { EntityCreateEditComponent } from './entity-create-edit.component';
 
@@ -8,7 +9,7 @@ describe('EntityCreateEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EntityCreateEditComponent ]
+      declarations: [ EntityModule ]
     })
     .compileComponents();
   });
