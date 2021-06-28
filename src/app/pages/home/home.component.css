@@ -8,6 +8,8 @@
 .card{
     width: 18rem;
     margin-right: 10px;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
 }
 
 .row{
@@ -49,6 +51,10 @@ a:hover{
 
 .card-filter{
     width: 100%;
+}
+
+.button-container{
+    display: flex;
 }
 
 

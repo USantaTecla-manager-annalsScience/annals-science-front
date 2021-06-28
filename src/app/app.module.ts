@@ -20,6 +20,7 @@ import { EntityModule } from './pages/entity/entity.module';
 import { HomeModule } from './pages/home/home.module';
 import { PersonModule } from './pages/person/person.module';
 import { ProductModule } from './pages/product/product.module';
+import { AuthService } from './services/auth.service';
 import { AuthInterceptorService } from './services/interceptor.service';
 import { SharedModule } from './shared/shared.module';
 
@@ -58,7 +59,8 @@ import { SharedModule } from './shared/shared.module';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true
-  }],
+  }, 
+  AuthService],
   entryComponents:[ModalRegisterComponent, SnackbarComponent],
   bootstrap: [AppComponent],
   exports:[FilterComponent]

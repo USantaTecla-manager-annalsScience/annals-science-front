@@ -13,4 +13,26 @@ html{
     padding:0;
   }
 
+  @media (max-width: 576px) { 
+    .btn{
+      min-width: 50px;
+      display: flex;
+      margin-bottom: 5px;
+    }
 
+    .btn em{
+        margin-right: 5px;
+    }
+
+    .mat-dialog-container .modal__buttons{
+      display: flex;
+    }
+
+    .button-group{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    
+  }
+}
